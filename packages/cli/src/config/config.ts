@@ -276,7 +276,6 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           'all-files',
           'Use @ includes in the application instead. This flag will be removed in a future version.',
         )
-
         .check((argv) => {
           if (argv.prompt && argv['promptInteractive']) {
             throw new Error(
