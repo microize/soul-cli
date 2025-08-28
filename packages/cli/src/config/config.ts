@@ -78,6 +78,7 @@ export interface CliArgs {
   proxy: string | undefined;
   includeDirectories: string[] | undefined;
   screenReader: boolean | undefined;
+  sessionSummary: string | undefined;
 }
 
 export async function parseArguments(settings: Settings): Promise<CliArgs> {
@@ -227,6 +228,10 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           description: 'Enable screen reader mode for accessibility.',
           default: false,
         })
+        .option('session-summary', {
+          type: 'string',
+          description: 'File to write session summary to.',
+        })
         .deprecateOption(
           'telemetry',
           'Use settings.json instead. This flag will be removed in a future version.',
@@ -271,6 +276,7 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           'all-files',
           'Use @ includes in the application instead. This flag will be removed in a future version.',
         )
+
         .check((argv) => {
           if (argv.prompt && argv['promptInteractive']) {
             throw new Error(
