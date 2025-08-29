@@ -79,10 +79,10 @@ export async function loadConfig(
     false,
     fileService,
     extensionContextFilePaths,
+    false, // FIX ME FIX ME
   );
   configParams.userMemory = memoryContent;
   configParams.geminiMdFileCount = fileCount;
-
   const config = new Config({
     ...configParams,
   });
