@@ -6,6 +6,7 @@
 
 // Export config
 export * from './config/config.js';
+export * from './config/models.js';
 
 // Export Core Logic
 export * from './core/client.js';
@@ -99,5 +100,7 @@ export { OAuthUtils } from './mcp/oauth-utils.js';
 
 // Export telemetry functions
 export * from './telemetry/index.js';
+export * from './telemetry/types.js';
+export * from './telemetry/loggers.js';
 export { sessionId } from './utils/session.js';
 export * from './utils/browser.js';

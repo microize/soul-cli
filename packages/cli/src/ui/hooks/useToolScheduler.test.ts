@@ -29,7 +29,7 @@ import {
   ToolInvocation,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import {
   HistoryItemWithoutId,
   ToolCallStatus,
@@ -37,8 +37,8 @@ import {
 } from '../types.js';
 
 // Mocks
-vi.mock('@google/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@google/gemini-cli-core');
+vi.mock('@nightskyai/gemini-cli-core', async () => {
+  const actual = await vi.importActual('@nightskyai/gemini-cli-core');
   return {
     ...actual,
     ToolRegistry: vi.fn(),

@@ -20,7 +20,7 @@ import {
   ToolCall,
   Status as CoreStatus,
   EditorType,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import { useCallback, useState, useMemo } from 'react';
 import {
   HistoryItemToolGroup,

@@ -29,18 +29,28 @@ esbuild
       '@lydell/node-pty-linux-x64',
       '@lydell/node-pty-win32-arm64',
       '@lydell/node-pty-win32-x64',
+      '@google/genai',
+      '@modelcontextprotocol/sdk',
     ],
     alias: {
       'is-in-ci': path.resolve(
         __dirname,
         'packages/cli/src/patches/is-in-ci.ts',
       ),
+      '@nightskyai/gemini-cli-core': path.resolve(
+        __dirname,
+        'packages/core/src/index.ts',
+      ),
+      '@nightskyai/gemini-cli-test-utils': path.resolve(
+        __dirname,
+        'packages/test-utils/src/index.ts',
+      ),
     },
     define: {
       'process.env.CLI_VERSION': JSON.stringify(pkg.version),
     },
     banner: {
-      js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url); globalThis.__filename = require('url').fileURLToPath(import.meta.url); globalThis.__dirname = require('path').dirname(globalThis.__filename);`,
+      js: `import { createRequire as __createRequire } from 'module'; const require = __createRequire(import.meta.url); globalThis.__filename = require('url').fileURLToPath(import.meta.url); globalThis.__dirname = require('path').dirname(globalThis.__filename);`,
     },
     loader: { '.node': 'file' },
   })

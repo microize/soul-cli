@@ -9,7 +9,7 @@ import {
   Config,
   getProjectCommandsDir,
   getUserCommandsDir,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import mock from 'mock-fs';
 import { FileCommandLoader } from './FileCommandLoader.js';
 import { assert, vi } from 'vitest';
@@ -52,9 +52,9 @@ vi.mock('./prompt-processors/argumentProcessor.js', async (importOriginal) => {
       .mockImplementation(() => new original.DefaultArgumentProcessor()),
   };
 });
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
   return {
     ...original,
     isCommandAllowed: vi.fn(),

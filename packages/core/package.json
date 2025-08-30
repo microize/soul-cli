@@ -1,10 +1,10 @@
 {
-  "name": "@google/gemini-cli-core",
+  "name": "@nightskyai/gemini-cli-core",
   "version": "0.2.2",
   "description": "Gemini CLI Core",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/nightskyai/gemini-cli.git"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -66,7 +66,7 @@
     "@lydell/node-pty-win32-x64": "1.1.0"
   },
   "devDependencies": {
-    "@google/gemini-cli-test-utils": "file:../test-utils",
+    "@nightskyai/gemini-cli-test-utils": "file:../test-utils",
     "@types/diff": "^7.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/micromatch": "^4.0.8",

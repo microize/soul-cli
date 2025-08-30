@@ -13,7 +13,7 @@ import {
   ReadManyFilesTool,
   StandardFileSystemService,
   ToolRegistry,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import * as os from 'os';
 import { ToolCallStatus } from '../types.js';
 import { UseHistoryManagerReturn } from './useHistoryManager.js';

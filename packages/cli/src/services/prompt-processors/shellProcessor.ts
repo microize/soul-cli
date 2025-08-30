@@ -10,7 +10,7 @@ import {
   escapeShellArg,
   getShellConfiguration,
   ShellExecutionService,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 
 import { CommandContext } from '../../ui/commands/types.js';
 import {

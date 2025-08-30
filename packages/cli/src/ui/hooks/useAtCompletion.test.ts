@@ -9,12 +9,12 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import { useAtCompletion } from './useAtCompletion.js';
-import { Config, FileSearch, FileSearchFactory } from '@google/gemini-cli-core';
+import { Config, FileSearch, FileSearchFactory } from '@nightskyai/gemini-cli-core';
 import {
   createTmpDir,
   cleanupTmpDir,
   FileSystemStructure,
-} from '@google/gemini-cli-test-utils';
+} from '@nightskyai/gemini-cli-test-utils';
 import { useState } from 'react';
 import { Suggestion } from '../components/SuggestionsDisplay.js';
 

@@ -15,7 +15,7 @@ import {
   ToolExecuteConfirmationDetails,
   ToolMcpConfirmationDetails,
   Config,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import {
   RadioButtonSelect,
   RadioSelectItem,

@@ -13,7 +13,7 @@ import {
   Config,
   getProjectCommandsDir,
   getUserCommandsDir,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import { ICommandLoader } from './types.js';
 import {
   CommandContext,

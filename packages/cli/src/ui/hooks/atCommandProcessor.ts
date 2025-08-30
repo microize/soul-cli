@@ -13,7 +13,7 @@ import {
   getErrorMessage,
   isNodeError,
   unescapePath,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 import {
   HistoryItem,
   IndividualToolCallDisplay,

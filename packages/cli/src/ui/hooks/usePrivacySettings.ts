@@ -10,7 +10,7 @@ import {
   CodeAssistServer,
   UserTierId,
   LoggingContentGenerator,
-} from '@google/gemini-cli-core';
+} from '@nightskyai/gemini-cli-core';
 
 export interface PrivacyState {
   isLoading: boolean;

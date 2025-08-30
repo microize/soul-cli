@@ -8,7 +8,7 @@ import { describe, it, expect, beforeEach, vi, type Mock } from 'vitest';
 import { ConfirmationRequiredError, ShellProcessor } from './shellProcessor.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { CommandContext } from '../../ui/commands/types.js';
-import { ApprovalMode, Config } from '@google/gemini-cli-core';
+import { ApprovalMode, Config } from '@nightskyai/gemini-cli-core';
 import os from 'os';
 import { quote } from 'shell-quote';
 
@@ -34,7 +34,7 @@ function getExpectedEscapedArgForPlatform(arg: string): string {
 const mockCheckCommandPermissions = vi.hoisted(() => vi.fn());
 const mockShellExecute = vi.hoisted(() => vi.fn());
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
   const original = await importOriginal<object>();
   return {
     ...original,
