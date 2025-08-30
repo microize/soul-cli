@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,9 +8,9 @@ const { logSlashCommand } = vi.hoisted(() => ({
   logSlashCommand: vi.fn(),
 }));
 
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
 
   return {
     ...original,
@@ -76,7 +76,7 @@ import {
   ConfirmShellCommandsActionReturn,
   SlashCommand,
 } from '../commands/types.js';
-import { ToolConfirmationOutcome } from '@nightskyai/gemini-cli-core';
+import { ToolConfirmationOutcome } from '@nightskyai/soul-cli-core';
 import { LoadedSettings } from '../../config/settings.js';
 import { MessageType } from '../types.js';
 import { BuiltinCommandLoader } from '../../services/BuiltinCommandLoader.js';
@@ -85,7 +85,7 @@ import { McpPromptLoader } from '../../services/McpPromptLoader.js';
 import {
   SlashCommandStatus,
   makeFakeConfig,
-} from '@nightskyai/gemini-cli-core/index.js';
+} from '@nightskyai/soul-cli-core/index.js';
 
 function createTestCommand(
   overrides: Partial<SlashCommand>,

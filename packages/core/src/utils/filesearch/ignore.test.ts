@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { describe, it, expect, afterEach } from 'vitest';
 import { Ignore, loadIgnoreRules } from './ignore.js';
-import { createTmpDir, cleanupTmpDir } from '@nightskyai/gemini-cli-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@nightskyai/soul-cli-test-utils';
 
 describe('Ignore', () => {
   describe('getDirectoryFilter', () => {

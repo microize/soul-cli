@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -32,7 +32,7 @@ export const CompressionMessage: React.FC<CompressionDisplayProps> = ({
         {compression.isPending ? (
           <Spinner type="dots" />
         ) : (
-          <Text color={Colors.AccentPurple}>✦</Text>
+          <Text color={Colors.AccentPurple}>✱</Text>
         )}
       </Box>
       <Box>

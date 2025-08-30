@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { type ReactNode } from 'react';
 import { Content } from '@google/genai';
 import { HistoryItemWithoutId } from '../types.js';
-import { Config, GitService, Logger } from '@nightskyai/gemini-cli-core';
+import { Config, GitService, Logger } from '@nightskyai/soul-cli-core';
 import { LoadedSettings } from '../../config/settings.js';
 import { UseHistoryManagerReturn } from '../hooks/useHistoryManager.js';
 import type { HistoryItem } from '../types.js';

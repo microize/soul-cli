@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -9,7 +9,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as cache from './crawlCache.js';
 import { crawl } from './crawler.js';
-import { createTmpDir, cleanupTmpDir } from '@nightskyai/gemini-cli-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@nightskyai/soul-cli-test-utils';
 import { Ignore, loadIgnoreRules } from './ignore.js';
 
 describe('crawler', () => {

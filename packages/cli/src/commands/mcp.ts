@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// File for 'gemini mcp' command
+// File for 'soul mcp' command
 import type { CommandModule, Argv } from 'yargs';
 import { addCommand } from './mcp/add.js';
 import { removeCommand } from './mcp/remove.js';

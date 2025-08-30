@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// File for 'gemini mcp remove' command
+// File for 'soul mcp remove' command
 import type { CommandModule } from 'yargs';
 import { loadSettings, SettingScope } from '../../config/settings.js';
 
@@ -39,7 +39,7 @@ export const removeCommand: CommandModule = {
   describe: 'Remove a server',
   builder: (yargs) =>
     yargs
-      .usage('Usage: gemini mcp remove [options] <name>')
+      .usage('Usage: soul mcp remove [options] <name>')
       .positional('name', {
         describe: 'Name of the server',
         type: 'string',

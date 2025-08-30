@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { FileSearchFactory, AbortError, filter } from './fileSearch.js';
-import { createTmpDir, cleanupTmpDir } from '@nightskyai/gemini-cli-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@nightskyai/soul-cli-test-utils';
 
 describe('FileSearch', () => {
   let tmpDir: string;

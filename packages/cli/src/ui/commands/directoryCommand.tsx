@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,7 +8,7 @@ import { SlashCommand, CommandContext, CommandKind } from './types.js';
 import { MessageType } from '../types.js';
 import * as os from 'os';
 import * as path from 'path';
-import { loadServerHierarchicalMemory } from '@nightskyai/gemini-cli-core';
+import { loadServerHierarchicalMemory } from '@nightskyai/soul-cli-core';
 
 export function expandHomeDir(p: string): string {
   if (!p) {

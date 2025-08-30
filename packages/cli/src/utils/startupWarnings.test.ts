@@ -1,16 +1,16 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getStartupWarnings } from './startupWarnings.js';
 import * as fs from 'fs/promises';
-import { getErrorMessage } from '@nightskyai/gemini-cli-core';
+import { getErrorMessage } from '@nightskyai/soul-cli-core';
 
 vi.mock('fs/promises');
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,

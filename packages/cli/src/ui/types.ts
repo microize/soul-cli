@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import {
   ToolCallConfirmationDetails,
   ToolResultDisplay,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 
 // Only defining the state enum needed by the UI
 export enum StreamingState {

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -15,12 +15,12 @@ import {
 } from 'vitest';
 import { ideCommand } from './ideCommand.js';
 import { type CommandContext } from './types.js';
-import { type Config, DetectedIde } from '@nightskyai/gemini-cli-core';
-import * as core from '@nightskyai/gemini-cli-core';
+import { type Config, DetectedIde } from '@nightskyai/soul-cli-core';
+import * as core from '@nightskyai/soul-cli-core';
 
 vi.mock('child_process');
 vi.mock('glob');
-vi.mock('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core');
 
 describe('ideCommand', () => {
   let mockContext: CommandContext;

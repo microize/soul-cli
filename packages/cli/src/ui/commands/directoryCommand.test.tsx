@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { directoryCommand, expandHomeDir } from './directoryCommand.js';
-import { Config, WorkspaceContext } from '@nightskyai/gemini-cli-core';
+import { Config, WorkspaceContext } from '@nightskyai/soul-cli-core';
 import { CommandContext } from './types.js';
 import { MessageType } from '../types.js';
 import * as os from 'os';

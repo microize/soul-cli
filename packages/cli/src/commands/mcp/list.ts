@@ -1,17 +1,17 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// File for 'gemini mcp list' command
+// File for 'soul mcp list' command
 import type { CommandModule } from 'yargs';
 import { loadSettings } from '../../config/settings.js';
 import {
   MCPServerConfig,
   MCPServerStatus,
   createTransport,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { loadExtensions } from '../../config/extension.js';
 

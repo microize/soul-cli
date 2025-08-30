@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -22,10 +22,10 @@ import {
   type EditorType,
   checkHasEditorType,
   allowEditorTypeInSandbox,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 
-vi.mock('@nightskyai/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-core');
   return {
     ...actual,
     checkHasEditorType: vi.fn(() => true),

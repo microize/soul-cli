@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { isNodeError, getProjectTempDir } from '@nightskyai/gemini-cli-core';
+import { isNodeError, getProjectTempDir } from '@nightskyai/soul-cli-core';
 
 const HISTORY_FILE = 'shell_history';
 const MAX_HISTORY_LENGTH = 100;

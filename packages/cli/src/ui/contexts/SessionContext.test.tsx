@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -14,7 +14,7 @@ import {
   SessionMetrics,
 } from './SessionContext.js';
 import { describe, it, expect, vi } from 'vitest';
-import { uiTelemetryService } from '@nightskyai/gemini-cli-core';
+import { uiTelemetryService } from '@nightskyai/soul-cli-core';
 
 /**
  * A test harness component that uses the hook and exposes the context value

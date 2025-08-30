@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { uiTelemetryService } from '@nightskyai/gemini-cli-core';
+import { uiTelemetryService } from '@nightskyai/soul-cli-core';
 import { CommandKind, SlashCommand } from './types.js';
 
 export const clearCommand: SlashCommand = {

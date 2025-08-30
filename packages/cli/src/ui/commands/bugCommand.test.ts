@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -16,7 +16,7 @@ import { formatMemoryUsage } from '../utils/formatters.js';
 vi.mock('open');
 vi.mock('../../utils/version.js');
 vi.mock('../utils/formatters.js');
-vi.mock('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core');
 vi.mock('node:process', () => ({
   default: {
     platform: 'test-platform',
@@ -31,7 +31,7 @@ describe('bugCommand', () => {
   beforeEach(() => {
     vi.mocked(getCliVersion).mockResolvedValue('0.1.0');
     vi.mocked(formatMemoryUsage).mockReturnValue('100 MB');
-    vi.mock('@nightskyai/gemini-cli-core', () => ({
+    vi.mock('@nightskyai/soul-cli-core', () => ({
       sessionId: 'test-session-id',
     }));
     vi.stubEnv('SANDBOX', 'gemini-test');

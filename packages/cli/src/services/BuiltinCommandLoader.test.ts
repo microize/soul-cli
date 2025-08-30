@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -22,7 +22,7 @@ vi.mock('../ui/commands/restoreCommand.js', () => ({
 
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { BuiltinCommandLoader } from './BuiltinCommandLoader.js';
-import { Config } from '@nightskyai/gemini-cli-core';
+import { Config } from '@nightskyai/soul-cli-core';
 import { CommandKind } from '../ui/commands/types.js';
 
 import { ideCommand } from '../ui/commands/ideCommand.js';

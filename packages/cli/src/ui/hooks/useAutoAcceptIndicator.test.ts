@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -20,14 +20,14 @@ import {
   Config,
   Config as ActualConfigType,
   ApprovalMode,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { useKeypress, Key } from './useKeypress.js';
 
 vi.mock('./useKeypress.js');
 
-vi.mock('@nightskyai/gemini-cli-core', async () => {
+vi.mock('@nightskyai/soul-cli-core', async () => {
   const actualServerModule = (await vi.importActual(
-    '@nightskyai/gemini-cli-core',
+    '@nightskyai/soul-cli-core',
   )) as Record<string, unknown>;
   return {
     ...actualServerModule,

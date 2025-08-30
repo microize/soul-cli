@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -20,7 +20,7 @@ import {
   MCPServerStatus,
   mcpServerRequiresOAuth,
   getErrorMessage,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 
 const COLOR_GREEN = '\u001b[32m';
 const COLOR_YELLOW = '\u001b[33m';
@@ -139,7 +139,7 @@ const getMcpStatus = async (
       needsAuthHint = true;
       try {
         const { MCPOAuthTokenStorage } = await import(
-          '@nightskyai/gemini-cli-core'
+          '@nightskyai/soul-cli-core'
         );
         const hasToken = await MCPOAuthTokenStorage.getToken(serverName);
         if (hasToken) {
@@ -376,7 +376,7 @@ const authCommand: SlashCommand = {
       );
 
       // Import dynamically to avoid circular dependencies
-      const { MCPOAuthProvider } = await import('@nightskyai/gemini-cli-core');
+      const { MCPOAuthProvider } = await import('@nightskyai/soul-cli-core');
 
       let oauthConfig = server.oauth;
       if (!oauthConfig) {

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -10,8 +10,8 @@ import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 
 // Mock the telemetry service
-vi.mock('@nightskyai/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-core');
   return {
     ...actual,
     uiTelemetryService: {
@@ -20,7 +20,7 @@ vi.mock('@nightskyai/gemini-cli-core', async () => {
   };
 });
 
-import { GeminiClient, uiTelemetryService } from '@nightskyai/gemini-cli-core';
+import { GeminiClient, uiTelemetryService } from '@nightskyai/soul-cli-core';
 
 describe('clearCommand', () => {
   let mockContext: CommandContext;

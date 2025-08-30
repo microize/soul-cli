@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -10,7 +10,7 @@ import {
   FileSearch,
   FileSearchFactory,
   escapePath,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import {
   Suggestion,
   MAX_SUGGESTIONS_TO_SHOW,

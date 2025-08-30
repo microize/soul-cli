@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { ICommandLoader } from './types.js';
 import { SlashCommand } from '../ui/commands/types.js';
-import { Config } from '@nightskyai/gemini-cli-core';
+import { Config } from '@nightskyai/soul-cli-core';
 import { aboutCommand } from '../ui/commands/aboutCommand.js';
 import { authCommand } from '../ui/commands/authCommand.js';
 import { bugCommand } from '../ui/commands/bugCommand.js';

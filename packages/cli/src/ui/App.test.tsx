@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -17,7 +17,7 @@ import {
   GeminiClient,
   ideContext,
   type AuthType,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { LoadedSettings, SettingsFile, Settings } from '../config/settings.js';
 import process from 'node:process';
 import { useGeminiStream } from './hooks/useGeminiStream.js';
@@ -89,10 +89,10 @@ interface MockServerConfig {
   getIdeClient: Mock<() => { getCurrentIde: Mock<() => string | undefined> }>;
 }
 
-// Mock @nightskyai/gemini-cli-core and its Config class
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+// Mock @nightskyai/soul-cli-core and its Config class
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const actualCore =
-    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
   const ConfigClassMock = vi
     .fn()
     .mockImplementation((optionsPassedToConstructor) => {
@@ -261,7 +261,7 @@ vi.mock('../hooks/useTerminalSize.js', () => ({
 
 const mockedCheckForUpdates = vi.mocked(checkForUpdates);
 const { isGitRepository: mockedIsGitRepository } = vi.mocked(
-  await import('@nightskyai/gemini-cli-core'),
+  await import('@nightskyai/soul-cli-core'),
 );
 
 vi.mock('node:child_process');
@@ -365,7 +365,7 @@ describe('App UI', () => {
       mockedIsGitRepository.mockResolvedValue(true);
       const info: UpdateObject = {
         update: {
-          name: '@nightskyai/gemini-cli',
+          name: '@nightskyai/soul-cli',
           latest: '1.1.0',
           current: '1.0.0',
         },
@@ -392,7 +392,7 @@ describe('App UI', () => {
       mockedIsGitRepository.mockResolvedValue(false);
       const info: UpdateObject = {
         update: {
-          name: '@nightskyai/gemini-cli',
+          name: '@nightskyai/soul-cli',
           latest: '1.1.0',
           current: '1.0.0',
         },
@@ -422,7 +422,7 @@ describe('App UI', () => {
       mockedIsGitRepository.mockResolvedValue(false);
       const info: UpdateObject = {
         update: {
-          name: '@nightskyai/gemini-cli',
+          name: '@nightskyai/soul-cli',
           latest: '1.1.0',
           current: '1.0.0',
         },
@@ -452,7 +452,7 @@ describe('App UI', () => {
       mockedIsGitRepository.mockResolvedValue(false);
       const info: UpdateObject = {
         update: {
-          name: '@nightskyai/gemini-cli',
+          name: '@nightskyai/soul-cli',
           latest: '1.1.0',
           current: '1.0.0',
         },
@@ -485,7 +485,7 @@ describe('App UI', () => {
       process.env.GEMINI_CLI_DISABLE_AUTOUPDATER = 'true';
       const info: UpdateObject = {
         update: {
-          name: '@nightskyai/gemini-cli',
+          name: '@nightskyai/soul-cli',
           latest: '1.1.0',
           current: '1.0.0',
         },

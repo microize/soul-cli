@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -17,9 +17,9 @@ import {
 
 const mockIsBinary = vi.hoisted(() => vi.fn());
 const mockShellExecutionService = vi.hoisted(() => vi.fn());
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
   return {
     ...original,
     ShellExecutionService: { execute: mockShellExecutionService },
@@ -40,7 +40,7 @@ import {
   type GeminiClient,
   type ShellExecutionResult,
   type ShellOutputEvent,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';

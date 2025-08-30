@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -12,7 +12,7 @@ import os from 'os';
 import pathMod from 'path';
 import { useState, useCallback, useEffect, useMemo, useReducer } from 'react';
 import stringWidth from 'string-width';
-import { unescapePath } from '@nightskyai/gemini-cli-core';
+import { unescapePath } from '@nightskyai/soul-cli-core';
 import { toCodePoints, cpLen, cpSlice } from '../../utils/textUtils.js';
 import { handleVimAction, VimAction } from './vim-buffer-actions.js';
 

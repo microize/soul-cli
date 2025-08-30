@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -13,12 +13,12 @@ import {
   UserTierId,
   GeminiClient,
   ContentGenerator,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { OAuth2Client } from 'google-auth-library';
 import { usePrivacySettings } from './usePrivacySettings.js';
 
 // Mock the dependencies
-vi.mock('@nightskyai/gemini-cli-core', () => {
+vi.mock('@nightskyai/soul-cli-core', () => {
   // Mock classes for instanceof checks
   class MockCodeAssistServer {
     projectId = 'test-project-id';

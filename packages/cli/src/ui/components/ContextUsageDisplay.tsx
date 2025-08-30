@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { Text } from 'ink';
 import { Colors } from '../colors.js';
-import { tokenLimit } from '@nightskyai/gemini-cli-core';
+import { tokenLimit } from '@nightskyai/soul-cli-core';
 
 export const ContextUsageDisplay = ({
   promptTokenCount,

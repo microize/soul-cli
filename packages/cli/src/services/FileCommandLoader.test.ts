@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -9,7 +9,7 @@ import {
   Config,
   getProjectCommandsDir,
   getUserCommandsDir,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import mock from 'mock-fs';
 import { FileCommandLoader } from './FileCommandLoader.js';
 import { assert, vi } from 'vitest';
@@ -52,9 +52,9 @@ vi.mock('./prompt-processors/argumentProcessor.js', async (importOriginal) => {
       .mockImplementation(() => new original.DefaultArgumentProcessor()),
   };
 });
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
   return {
     ...original,
     isCommandAllowed: vi.fn(),

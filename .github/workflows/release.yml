@@ -151,7 +151,7 @@ jobs:
           registry-url: 'https://wombat-dressing-room.appspot.com'
           scope: '@google'
 
-      - name: 'Publish @google/gemini-cli-core'
+      - name: 'Publish @google/soul-cli-core'
         env:
           IS_DRY_RUN: '${{ steps.vars.outputs.is_dry_run }}'
           NODE_AUTH_TOKEN: '${{ secrets.WOMBAT_TOKEN_CORE }}'
@@ -159,7 +159,7 @@ jobs:
         run: |-
           npm publish \
             --dry-run="${IS_DRY_RUN}" \
-            --workspace="@google/gemini-cli-core" \
+            --workspace="@google/soul-cli-core" \
             --tag="${NPM_TAG}"
 
       - name: 'Install latest core package'
@@ -168,7 +168,7 @@ jobs:
         env:
           RELEASE_VERSION: '${{ steps.version.outputs.RELEASE_VERSION }}'
         run: |-
-          npm install "@google/gemini-cli-core@${RELEASE_VERSION}" \
+          npm install "@google/soul-cli-core@${RELEASE_VERSION}" \
           --workspace="@google/gemini-cli" \
           --save-exact
 
@@ -210,7 +210,7 @@ jobs:
           PREVIOUS_TAG: '${{ steps.previous_release.outputs.PREVIOUS_TAG }}'
         run: |-
           gh release create "${RELEASE_TAG}" \
-            bundle/gemini.js \
+            bundle/soul.js \
             --target "$RELEASE_BRANCH" \
             --title "Release ${RELEASE_TAG}" \
             --notes-start-tag "$PREVIOUS_TAG" \

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -12,7 +12,7 @@ import {
   Config,
   ConfigParameters,
   ContentGeneratorConfig,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -40,8 +40,8 @@ const TEST_CONTENT_GENERATOR_CONFIG: ContentGeneratorConfig = {
 };
 
 // Mock file discovery service and tool registry
-vi.mock('@nightskyai/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-core');
   return {
     ...actual,
     FileDiscoveryService: vi.fn().mockImplementation(() => ({

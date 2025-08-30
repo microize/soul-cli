@@ -53,7 +53,7 @@ npm run prepare:package # Prepare for npm publish
 ## Entry Points
 - **CLI Entry**: `packages/cli/index.ts` → `packages/cli/src/gemini.tsx`
 - **Core Library**: `packages/core/src/index.ts`
-- **Binary**: `bundle/gemini.js` (after build)
+- **Binary**: `bundle/soul.js` (after build)
 
 ## Architecture Overview
 
@@ -344,7 +344,7 @@ export function getAllSoulMdFilenames()    // was getAllGeminiMdFilenames()
 Critical step: Update ALL import references across the codebase:
 ```typescript
 // Find and replace all imports
-import { setSoulMdFilename } from '@nightskyai/soul-cli-core';  // was @google/gemini-cli-core
+import { setSoulMdFilename } from '@nightskyai/soul-cli-core';  // was @google/soul-cli-core
 ```
 
 Use systematic search to find all references:

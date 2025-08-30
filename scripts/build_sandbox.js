@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -93,13 +93,13 @@ execSync(
   },
 );
 
-console.log('packing @google/gemini-cli-core ...');
+console.log('packing @google/soul-cli-core ...');
 const corePackageDir = join('packages', 'core');
-rmSync(join(corePackageDir, 'dist', 'google-gemini-cli-core-*.tgz'), {
+rmSync(join(corePackageDir, 'dist', 'google-soul-cli-core-*.tgz'), {
   force: true,
 });
 execSync(
-  `npm pack -w @google/gemini-cli-core --pack-destination ./packages/core/dist`,
+  `npm pack -w @google/soul-cli-core --pack-destination ./packages/core/dist`,
   { stdio: 'ignore' },
 );
 
@@ -112,7 +112,7 @@ chmodSync(
   0o755,
 );
 chmodSync(
-  join(corePackageDir, 'dist', `google-gemini-cli-core-${packageVersion}.tgz`),
+  join(corePackageDir, 'dist', `google-soul-cli-core-${packageVersion}.tgz`),
   0o755,
 );
 

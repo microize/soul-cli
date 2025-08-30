@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,7 +8,7 @@ import { renderWithProviders } from '../../test-utils/render.js';
 import { waitFor } from '@testing-library/react';
 import { InputPrompt, InputPromptProps } from './InputPrompt.js';
 import type { TextBuffer } from './shared/text-buffer.js';
-import { Config } from '@nightskyai/gemini-cli-core';
+import { Config } from '@nightskyai/soul-cli-core';
 import * as path from 'path';
 import {
   CommandContext,

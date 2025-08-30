@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -16,7 +16,7 @@ import {
   makeSlashCommandEvent,
   SlashCommandStatus,
   ToolConfirmationOutcome,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
 import {

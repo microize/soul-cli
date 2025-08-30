@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -29,7 +29,7 @@ import {
   ToolInvocation,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@nightskyai/gemini-cli-core';
+} from '@nightskyai/soul-cli-core';
 import {
   HistoryItemWithoutId,
   ToolCallStatus,
@@ -37,8 +37,8 @@ import {
 } from '../types.js';
 
 // Mocks
-vi.mock('@nightskyai/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/gemini-cli-core');
+vi.mock('@nightskyai/soul-cli-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-core');
   return {
     ...actual,
     ToolRegistry: vi.fn(),

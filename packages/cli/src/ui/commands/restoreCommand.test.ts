@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -11,7 +11,7 @@ import * as path from 'path';
 import { restoreCommand } from './restoreCommand.js';
 import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
-import { Config, GitService } from '@nightskyai/gemini-cli-core';
+import { Config, GitService } from '@nightskyai/soul-cli-core';
 
 describe('restoreCommand', () => {
   let mockContext: CommandContext;

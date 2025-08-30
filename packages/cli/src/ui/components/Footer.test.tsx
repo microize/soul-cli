@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,15 +8,15 @@ import { render } from 'ink-testing-library';
 import { describe, it, expect, vi } from 'vitest';
 import { Footer } from './Footer.js';
 import * as useTerminalSize from '../hooks/useTerminalSize.js';
-import { tildeifyPath } from '@nightskyai/gemini-cli-core';
+import { tildeifyPath } from '@nightskyai/soul-cli-core';
 import path from 'node:path';
 
 vi.mock('../hooks/useTerminalSize.js');
 const useTerminalSizeMock = vi.mocked(useTerminalSize.useTerminalSize);
 
-vi.mock('@nightskyai/gemini-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/gemini-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
   return {
     ...original,
     shortenPath: (p: string, len: number) => {

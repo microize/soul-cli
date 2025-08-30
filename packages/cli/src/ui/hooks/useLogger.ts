@@ -1,11 +1,11 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { useState, useEffect } from 'react';
-import { sessionId, Logger } from '@nightskyai/gemini-cli-core';
+import { sessionId, Logger } from '@nightskyai/soul-cli-core';
 
 /**
  * Hook to manage the logger instance.

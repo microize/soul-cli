@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ esbuild
   .build({
     entryPoints: ['packages/cli/index.ts'],
     bundle: true,
-    outfile: 'bundle/gemini.js',
+    outfile: 'bundle/soul.js',
     platform: 'node',
     format: 'esm',
     external: [
@@ -37,11 +37,11 @@ esbuild
         __dirname,
         'packages/cli/src/patches/is-in-ci.ts',
       ),
-      '@nightskyai/gemini-cli-core': path.resolve(
+      '@nightskyai/soul-cli-core': path.resolve(
         __dirname,
         'packages/core/src/index.ts',
       ),
-      '@nightskyai/gemini-cli-test-utils': path.resolve(
+      '@nightskyai/soul-cli-test-utils': path.resolve(
         __dirname,
         'packages/test-utils/src/index.ts',
       ),

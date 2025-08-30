@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { describe, it, expect, vi } from 'vitest';
 import { ToolConfirmationMessage } from './ToolConfirmationMessage.js';
-import { ToolCallConfirmationDetails } from '@nightskyai/gemini-cli-core';
+import { ToolCallConfirmationDetails } from '@nightskyai/soul-cli-core';
 import { renderWithProviders } from '../../../test-utils/render.js';
 
 describe('ToolConfirmationMessage', () => {

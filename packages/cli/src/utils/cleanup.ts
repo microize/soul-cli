@@ -1,12 +1,12 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import { getProjectTempDir } from '@nightskyai/gemini-cli-core';
+import { getProjectTempDir } from '@nightskyai/soul-cli-core';
 
 const cleanupFunctions: Array<(() => void) | (() => Promise<void>)> = [];
 

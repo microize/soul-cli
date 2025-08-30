@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 import { homedir } from 'os';
-import { getErrorMessage, isWithinRoot } from '@nightskyai/gemini-cli-core';
+import { getErrorMessage, isWithinRoot } from '@nightskyai/soul-cli-core';
 import { Settings } from './settings.js';
 import stripJsonComments from 'strip-json-comments';
 

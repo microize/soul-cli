@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,7 +8,7 @@ import { Box, Newline, Text } from 'ink';
 import { RadioButtonSelect } from '../components/shared/RadioButtonSelect.js';
 import { usePrivacySettings } from '../hooks/usePrivacySettings.js';
 import { CloudPaidPrivacyNotice } from './CloudPaidPrivacyNotice.js';
-import { Config } from '@nightskyai/gemini-cli-core';
+import { Config } from '@nightskyai/soul-cli-core';
 import { Colors } from '../colors.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 

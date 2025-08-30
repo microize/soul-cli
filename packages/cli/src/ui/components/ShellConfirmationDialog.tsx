@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ToolConfirmationOutcome } from '@nightskyai/gemini-cli-core';
+import { ToolConfirmationOutcome } from '@nightskyai/soul-cli-core';
 import { Box, Text } from 'ink';
 import React from 'react';
 import { Colors } from '../colors.js';

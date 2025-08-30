@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -21,7 +21,7 @@ import {
 } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { Content } from '@google/genai';
-import { GeminiClient } from '@nightskyai/gemini-cli-core';
+import { GeminiClient } from '@nightskyai/soul-cli-core';
 
 import * as fsPromises from 'fs/promises';
 import { chatCommand } from './chatCommand.js';

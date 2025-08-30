@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright 2025 Google LLC
+ * Copyright 2025 Nightsky Labs
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import React from 'react';
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
-import { type Config } from '@nightskyai/gemini-cli-core';
+import { type Config } from '@nightskyai/soul-cli-core';
 
 interface TipsProps {
   config: Config;

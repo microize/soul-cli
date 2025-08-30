@@ -1,6 +1,6 @@
 {
-  "name": "@nightskyai/gemini-cli-core",
-  "version": "0.2.2",
+  "name": "@nightskyai/soul-cli-core",
+  "version": "0.3.0",
   "description": "Gemini CLI Core",
   "repository": {
     "type": "git",
@@ -66,7 +66,7 @@
     "@lydell/node-pty-win32-x64": "1.1.0"
   },
   "devDependencies": {
-    "@nightskyai/gemini-cli-test-utils": "file:../test-utils",
+    "@nightskyai/soul-cli-test-utils": "file:../test-utils",
     "@types/diff": "^7.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/micromatch": "^4.0.8",
