@@ -81,6 +81,11 @@ export * from './tools/memoryTool.js';
 export * from './tools/shell.js';
 export * from './tools/web-search.js';
 export * from './tools/read-many-files.js';
+export * from './tools/agent.js';
+export * from './tools/kill-bash.js';
+export * from './tools/bash-output.js';
+export * from './tools/todo-write.js';
+export * from './tools/notebook-edit.js';
 export * from './tools/mcp-client.js';
 export * from './tools/mcp-tool.js';
 

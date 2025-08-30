@@ -29,6 +29,10 @@ import {
 } from '../tools/memoryTool.js';
 import { WebSearchTool } from '../tools/web-search.js';
 import { NotebookEditTool } from '../tools/notebook-edit.js';
+import { TodoWriteTool } from '../tools/todo-write.js';
+import { BashOutputTool } from '../tools/bash-output.js';
+import { KillBashTool } from '../tools/kill-bash.js';
+import { AgentTool } from '../tools/agent.js';
 import { GeminiClient } from '../core/client.js';
 import { FileDiscoveryService } from '../services/fileDiscoveryService.js';
 import { GitService } from '../services/gitService.js';
@@ -796,9 +800,13 @@ export class Config {
     registerCoreTool(WebFetchTool, this);
     registerCoreTool(ReadManyFilesTool, this);
     registerCoreTool(ShellTool, this);
+    registerCoreTool(BashOutputTool, this);
+    registerCoreTool(KillBashTool, this);
     registerCoreTool(MemoryTool);
     registerCoreTool(WebSearchTool, this);
     registerCoreTool(NotebookEditTool, this);
+    registerCoreTool(TodoWriteTool, this);
+    registerCoreTool(AgentTool, this);
 
     await registry.discoverAllTools();
     return registry;

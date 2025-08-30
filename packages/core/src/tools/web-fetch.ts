@@ -55,7 +55,12 @@ interface GroundingSupportItem {
  */
 export interface WebFetchToolParams {
   /**
-   * The prompt containing URL(s) (up to 20) and instructions for processing their content.
+   * The URL to fetch content from
+   */
+  url: string;
+  
+  /**
+   * The prompt to run on the fetched content
    */
   prompt: string;
 }
@@ -72,15 +77,7 @@ class WebFetchToolInvocation extends BaseToolInvocation<
   }
 
   private async executeFallback(signal: AbortSignal): Promise<ToolResult> {
-    const urls = extractUrls(this.params.prompt);
-    if (urls.length === 0) {
-      return {
-        llmContent: 'Error: No URL found in the prompt for fallback.',
-        returnDisplay: 'Error: No URL found in the prompt for fallback.',
-      };
-    }
-    // For now, we only support one URL for fallback
-    let url = urls[0];
+    let url = this.params.url;
 
     // Convert GitHub blob URL to raw URL
     if (url.includes('github.com') && url.includes('/blob/')) {
@@ -106,9 +103,9 @@ class WebFetchToolInvocation extends BaseToolInvocation<
       }).substring(0, MAX_CONTENT_LENGTH);
 
       const geminiClient = this.config.getGeminiClient();
-      const fallbackPrompt = `The user requested the following: "${this.params.prompt}".
+      const fallbackPrompt = `${this.params.prompt}
 
-I was unable to access the URL directly. Instead, I have fetched the raw content of the page. Please use the following content to answer the request. Do not attempt to access the URL again.
+Content from ${url}:
 
 ---
 ${textContent}
@@ -136,10 +133,10 @@ ${textContent}
 
   getDescription(): string {
     const displayPrompt =
-      this.params.prompt.length > 100
-        ? this.params.prompt.substring(0, 97) + '...'
+      this.params.prompt.length > 50
+        ? this.params.prompt.substring(0, 47) + '...'
         : this.params.prompt;
-    return `Processing URLs and instructions from prompt: "${displayPrompt}"`;
+    return `Fetching ${this.params.url} with prompt: "${displayPrompt}"`;
   }
 
   override async shouldConfirmExecute(): Promise<
@@ -151,14 +148,13 @@ ${textContent}
 
     // Perform GitHub URL conversion here to differentiate between user-provided
     // URL and the actual URL to be fetched.
-    const urls = extractUrls(this.params.prompt).map((url) => {
-      if (url.includes('github.com') && url.includes('/blob/')) {
-        return url
-          .replace('github.com', 'raw.githubusercontent.com')
-          .replace('/blob/', '/');
-      }
-      return url;
-    });
+    let url = this.params.url;
+    if (url.includes('github.com') && url.includes('/blob/')) {
+      url = url
+        .replace('github.com', 'raw.githubusercontent.com')
+        .replace('/blob/', '/');
+    }
+    const urls = [url];
 
     const confirmationDetails: ToolCallConfirmationDetails = {
       type: 'info',
@@ -175,9 +171,8 @@ ${textContent}
   }
 
   async execute(signal: AbortSignal): Promise<ToolResult> {
-    const userPrompt = this.params.prompt;
-    const urls = extractUrls(userPrompt);
-    const url = urls[0];
+    const url = this.params.url;
+    const userPrompt = `${this.params.prompt}\n\nURL to fetch: ${url}`;
     const isPrivate = isPrivateIp(url);
 
     if (isPrivate) {
@@ -318,17 +313,40 @@ export class WebFetchTool extends BaseDeclarativeTool<
     super(
       WebFetchTool.Name,
       'WebFetch',
-      "Processes content from URL(s), including local and private network addresses (e.g., localhost), embedded in a prompt. Include up to 20 URLs and instructions (e.g., summarize, extract specific data) directly in the 'prompt' parameter.",
+      `
+- Fetches content from a specified URL and processes it using an AI model
+- Takes a URL and a prompt as input
+- Fetches the URL content, converts HTML to markdown
+- Processes the content with the prompt using a small, fast model
+- Returns the model's response about the content
+- Use this tool when you need to retrieve and analyze web content
+
+Usage notes:
+  - IMPORTANT: If an MCP-provided web fetch tool is available, prefer using that tool instead of this one, as it may have fewer restrictions. All MCP-provided tools start with "mcp__".
+  - The URL must be a fully-formed valid URL
+  - HTTP URLs will be automatically upgraded to HTTPS
+  - The prompt should describe what information you want to extract from the page
+  - This tool is read-only and does not modify any files
+  - Results may be summarized if the content is very large
+  - Includes a self-cleaning 15-minute cache for faster responses when repeatedly accessing the same URL
+  - When a URL redirects to a different host, the tool will inform you and provide the redirect URL in a special format. You should then make a new WebFetch request with the redirect URL to fetch the content.
+`,
       Kind.Fetch,
       {
         properties: {
+          url: {
+            description:
+              'The URL to fetch content from',
+            type: 'string',
+            format: 'uri',
+          },
           prompt: {
             description:
-              'A comprehensive prompt that includes the URL(s) (up to 20) to fetch and specific instructions on how to process their content (e.g., "Summarize https://example.com/article and extract key points from https://another.com/data"). Must contain as least one URL starting with http:// or https://.',
+              'The prompt to run on the fetched content',
             type: 'string',
           },
         },
-        required: ['prompt'],
+        required: ['url', 'prompt'],
         type: 'object',
       },
     );
@@ -341,14 +359,20 @@ export class WebFetchTool extends BaseDeclarativeTool<
   protected override validateToolParamValues(
     params: WebFetchToolParams,
   ): string | null {
-    if (!params.prompt || params.prompt.trim() === '') {
-      return "The 'prompt' parameter cannot be empty and must contain URL(s) and instructions.";
+    if (!params.url || params.url.trim() === '') {
+      return "The 'url' parameter cannot be empty.";
     }
-    if (
-      !params.prompt.includes('http://') &&
-      !params.prompt.includes('https://')
-    ) {
-      return "The 'prompt' must contain at least one valid URL (starting with http:// or https://).";
+    if (!params.prompt || params.prompt.trim() === '') {
+      return "The 'prompt' parameter cannot be empty.";
+    }
+    // Validate URL format
+    try {
+      const url = new URL(params.url);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+        return "The 'url' must use http:// or https:// protocol.";
+      }
+    } catch (e) {
+      return "The 'url' parameter must be a valid, fully-formed URL.";
     }
     return null;
   }

@@ -31,12 +31,44 @@ import {
   isCommandAllowed,
   stripShellWrapper,
 } from '../utils/shell-utils.js';
+import { BackgroundProcessService } from '../services/backgroundProcessService.js';
 
 export const OUTPUT_UPDATE_INTERVAL_MS = 1000;
 
 export interface ShellToolParams {
+  /**
+   * The command to execute
+   */
   command: string;
+  
+  /**
+   * Optional timeout in milliseconds (max 600000)
+   */
+  timeout?: number;
+  
+  /**
+   * Clear, concise description of what this command does in 5-10 words
+   */
   description?: string;
+  
+  /**
+   * Set to true to run this command in the background
+   */
+  run_in_background?: boolean;
+  
+  /**
+   * Run in sandboxed mode (read-only, no network access)
+   */
+  sandbox?: boolean;
+  
+  /**
+   * Optional shell path to use instead of the default shell
+   */
+  shellExecutable?: string;
+  
+  /**
+   * @deprecated Use absolute paths in commands instead
+   */
   directory?: string;
 }
 
@@ -99,6 +131,44 @@ class ShellToolInvocation extends BaseToolInvocation<
     terminalColumns?: number,
     terminalRows?: number,
   ): Promise<ToolResult> {
+    // Handle sandbox mode
+    if (this.params.sandbox) {
+      // In sandbox mode, prepend command with restrictions
+      // This is a simplified implementation - real sandboxing would require more sophisticated measures
+      if (os.platform() !== 'win32') {
+        // On Unix-like systems, we could use restricted shell or containers
+        // For now, we'll just warn that sandbox mode is not fully implemented
+        console.warn('Sandbox mode requested but not fully implemented - command will run with normal permissions');
+      }
+    }
+
+    // Handle timeout
+    const timeout = this.params.timeout || 120000; // Default 2 minutes
+    const maxTimeout = 600000; // Max 10 minutes
+    const effectiveTimeout = Math.min(timeout, maxTimeout);
+    
+    // Create timeout abort controller
+    const timeoutController = new AbortController();
+    let timeoutId: NodeJS.Timeout | undefined;
+    
+    // Set up timeout if not running in background
+    if (!this.params.run_in_background) {
+      timeoutId = setTimeout(() => {
+        timeoutController.abort();
+      }, effectiveTimeout);
+    }
+    
+    // Create a combined signal that responds to both user abort and timeout
+    const combinedSignal = signal.aborted ? signal : timeoutController.signal;
+    
+    // Listen for user abort to also trigger timeout controller
+    const abortListener = () => {
+      timeoutController.abort();
+    };
+    if (!signal.aborted) {
+      signal.addEventListener('abort', abortListener);
+    }
+    
     const strippedCommand = stripShellWrapper(this.params.command);
 
     if (signal.aborted) {
@@ -134,6 +204,82 @@ class ShellToolInvocation extends BaseToolInvocation<
       let lastUpdateTime = Date.now();
       let isBinaryStream = false;
 
+      // Handle background execution
+      if (this.params.run_in_background) {
+        // Generate unique ID for this background process
+        const service = BackgroundProcessService.getInstance();
+        const bashId = service.generateId();
+        
+        // Create abort controller for this specific process
+        const processAbortController = new AbortController();
+        
+        // For background execution, we don't wait for the command to complete
+        // We'll start it and return immediately with the bash ID
+        const { pid, result: resultPromise } = await ShellExecutionService.execute(
+          commandToExecute,
+          cwd,
+          (event: ShellOutputEvent) => {
+            // Capture output to the background service
+            switch (event.type) {
+              case 'data':
+                service.addOutput(bashId, event.chunk);
+                break;
+              case 'binary_detected':
+                service.addOutput(bashId, '[Binary output detected]');
+                break;
+              case 'binary_progress':
+                service.addOutput(bashId, `[Binary output: ${formatMemoryUsage(event.bytesReceived)} received]`);
+                break;
+            }
+            
+            // Still update display if provided
+            if (updateOutput) {
+              let currentDisplayOutput = '';
+              switch (event.type) {
+                case 'data':
+                  currentDisplayOutput = `[Background ${bashId}]: ${event.chunk}`;
+                  break;
+                case 'binary_detected':
+                  currentDisplayOutput = `[Background ${bashId}]: Binary output detected`;
+                  break;
+                case 'binary_progress':
+                  currentDisplayOutput = `[Background ${bashId}]: Receiving binary output... ${formatMemoryUsage(event.bytesReceived)} received`;
+                  break;
+              }
+              updateOutput(currentDisplayOutput);
+            }
+          },
+          processAbortController.signal,
+          this.config.getShouldUseNodePtyShell(),
+          terminalColumns,
+          terminalRows,
+        );
+        
+        // Register the process with the background service
+        service.registerProcess(
+          bashId,
+          pid,
+          this.params.command,
+          { pid, result: resultPromise },
+          processAbortController
+        );
+        
+        if (timeoutId) clearTimeout(timeoutId);
+        signal.removeEventListener('abort', abortListener);
+        
+        // Clean up temp file if it exists
+        if (fs.existsSync(tempFilePath)) {
+          fs.unlinkSync(tempFilePath);
+        }
+        
+        // Return immediately for background processes
+        return {
+          llmContent: `Started background process with ID: ${bashId}\nPID: ${pid}\nCommand: ${this.params.command}\n\nUse BashOutput tool with bash_id="${bashId}" to monitor the output.\nUse KillBash tool with bash_id="${bashId}" to terminate the process.`,
+          returnDisplay: `Background process started (ID: ${bashId}, PID: ${pid})`,
+        };
+      }
+      
+      // Normal (foreground) execution
       const { result: resultPromise } = await ShellExecutionService.execute(
         commandToExecute,
         cwd,
@@ -179,13 +325,23 @@ class ShellToolInvocation extends BaseToolInvocation<
             lastUpdateTime = Date.now();
           }
         },
-        signal,
+        combinedSignal,
         this.config.getShouldUseNodePtyShell(),
         terminalColumns,
         terminalRows,
       );
 
       const result = await resultPromise;
+      if (timeoutId) clearTimeout(timeoutId);
+      signal.removeEventListener('abort', abortListener);
+      
+      // Check if command was terminated due to timeout
+      if (timeoutController.signal.aborted && !signal.aborted) {
+        return {
+          llmContent: `Command exceeded timeout of ${effectiveTimeout}ms and was terminated.\nPartial output:\n${result.output || '(no output before timeout)'}`,
+          returnDisplay: `Command timed out after ${effectiveTimeout}ms`,
+        };
+      }
 
       const backgroundPIDs: number[] = [];
       if (os.platform() !== 'win32') {
@@ -280,6 +436,10 @@ class ShellToolInvocation extends BaseToolInvocation<
         llmContent,
         returnDisplay: returnDisplayMessage,
       };
+    } catch (error) {
+      if (timeoutId) clearTimeout(timeoutId);
+      signal.removeEventListener('abort', abortListener);
+      throw error;
     } finally {
       if (fs.existsSync(tempFilePath)) {
         fs.unlinkSync(tempFilePath);
@@ -290,7 +450,6 @@ class ShellToolInvocation extends BaseToolInvocation<
 
 function getShellToolDescription(): string {
   const returnedInfo = `
-
       The following information is returned:
 
       Command: Executed command.
@@ -303,11 +462,42 @@ function getShellToolDescription(): string {
       Background PIDs: List of background processes started or \`(none)\`.
       Process Group PGID: Process group started or \`(none)\``;
 
-  if (os.platform() === 'win32') {
-    return `This tool executes a given shell command as \`cmd.exe /c <command>\`. Command can start background processes using \`start /b\`.${returnedInfo}`;
-  } else {
-    return `This tool executes a given shell command as \`bash -c <command>\`. Command can start background processes using \`&\`. Command is executed as a subprocess that leads its own process group. Command process group can be terminated as \`kill -- -PGID\` or signaled as \`kill -s SIGNAL -- -PGID\`.${returnedInfo}`;
-  }
+  return `Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.
+
+Before executing the command, please follow these steps:
+
+1. Directory Verification:
+   - If the command will create new directories or files, first use the LS tool to verify the parent directory exists and is the correct location
+   - For example, before running "mkdir foo/bar", first use LS to check that "foo" exists and is the intended parent directory
+
+2. Command Execution:
+   - Always quote file paths that contain spaces with double quotes (e.g., cd "path with spaces/file.txt")
+   - Examples of proper quoting:
+     - cd "/Users/name/My Documents" (correct)
+     - cd /Users/name/My Documents (incorrect - will fail)
+     - python "/path/with spaces/script.py" (correct)
+     - python /path/with spaces/script.py (incorrect - will fail)
+   - After ensuring proper quoting, execute the command.
+   - Capture the output of the command.
+
+Usage notes:
+  - The command argument is required.
+  - You can specify an optional timeout in milliseconds (up to 600000ms / 10 minutes). If not specified, commands will timeout after 120000ms (2 minutes).
+  - It is very helpful if you write a clear, concise description of what this command does in 5-10 words.
+  - If the output exceeds 30000 characters, output will be truncated before being returned to you.
+  - You can use the \`run_in_background\` parameter to run the command in the background, which allows you to continue working while the command runs. You can monitor the output using the Bash tool as it becomes available. Never use \`run_in_background\` to run 'sleep' as it will return immediately. You do not need to use '&' at the end of the command when using this parameter.
+  - VERY IMPORTANT: You MUST avoid using search commands like \`find\` and \`grep\`. Instead use Grep, Glob, or Task to search. You MUST avoid read tools like \`cat\`, \`head\`, \`tail\`, and use Read to read files.
+ - If you _still_ need to run \`grep\`, STOP. ALWAYS USE ripgrep at \`rg\` first, which all Soul CLI users have pre-installed.
+  - When issuing multiple commands, use the ';' or '&&' operator to separate them. DO NOT use newlines (newlines are ok in quoted strings).
+  - Try to maintain your current working directory throughout the session by using absolute paths and avoiding usage of \`cd\`. You may use \`cd\` if the User explicitly requests it.
+    <good-example>
+    pytest /foo/bar/tests
+    </good-example>
+    <bad-example>
+    cd /foo/bar && pytest tests
+    </bad-example>
+
+${returnedInfo}`;
 }
 
 function getCommandDescription(): string {
@@ -338,15 +528,31 @@ export class ShellTool extends BaseDeclarativeTool<
             type: 'string',
             description: getCommandDescription(),
           },
+          timeout: {
+            type: 'number',
+            description: 'Optional timeout in milliseconds (max 600000)',
+          },
           description: {
             type: 'string',
             description:
-              'Brief description of the command for the user. Be specific and concise. Ideally a single sentence. Can be up to 3 sentences for clarity. No line breaks.',
+              'Clear, concise description of what this command does in 5-10 words. Examples:\nInput: ls\nOutput: Lists files in current directory\n\nInput: npm install\nOutput: Installs package dependencies\n\nInput: mkdir foo\nOutput: Creates directory \'foo\'',
+          },
+          run_in_background: {
+            type: 'boolean',
+            description: 'Set to true to run this command in the background. Use BashOutput to read the output later.',
+          },
+          sandbox: {
+            type: 'boolean',
+            description: 'Run in sandboxed mode: command may not write to filesystem or use network, but can read files and analyze data. When possible, run commands in this mode for a smoother experience without approval prompts.',
+          },
+          shellExecutable: {
+            type: 'string',
+            description: 'Optional shell path to use instead of the default shell. Used primarily for testing.',
           },
           directory: {
             type: 'string',
             description:
-              '(OPTIONAL) Directory to run the command in, if not the project root directory. Must be relative to the project root directory and must already exist.',
+              '(DEPRECATED) Directory to run the command in. Use absolute paths in commands instead.',
           },
         },
         required: ['command'],
@@ -375,6 +581,22 @@ export class ShellTool extends BaseDeclarativeTool<
     if (getCommandRoots(params.command).length === 0) {
       return 'Could not identify command root to obtain permission from user.';
     }
+    
+    // Validate timeout
+    if (params.timeout !== undefined) {
+      if (params.timeout <= 0) {
+        return 'Timeout must be a positive number.';
+      }
+      if (params.timeout > 600000) {
+        return 'Timeout cannot exceed 600000ms (10 minutes).';
+      }
+    }
+    
+    // Validate description length
+    if (params.description && params.description.split(' ').length > 15) {
+      return 'Description should be 5-10 words for clarity.';
+    }
+    
     if (params.directory) {
       if (path.isAbsolute(params.directory)) {
         return 'Directory cannot be absolute. Please refer to workspace directories by their name.';

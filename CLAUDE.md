@@ -530,3 +530,169 @@ external: [
 - **Never**: Mark as external without adding to dependencies - will fail at runtime!
 
 This systematic approach ensures a complete and functional package transformation while maintaining all original functionality.
+
+## Tool Development and Integration
+
+### Overview
+Soul CLI has a sophisticated tool system that allows extending the AI's capabilities. Tools are declarative components that follow a specific pattern for registration, validation, and execution.
+
+### Complete Tool Integration Process
+
+#### 1. Tool Implementation Pattern
+All tools must follow the `BaseDeclarativeTool` pattern with these components:
+
+```typescript
+// 1. Parameter Interface
+export interface YourToolParams {
+  required_param: string;
+  optional_param?: boolean;
+}
+
+// 2. Tool Invocation Class
+class YourToolInvocation extends BaseToolInvocation<YourToolParams, ToolResult> {
+  constructor(private readonly config: Config, params: YourToolParams) {
+    super(params);
+  }
+  
+  getDescription(): string {
+    return `Processing ${this.params.required_param}`;
+  }
+  
+  async execute(signal: AbortSignal): Promise<ToolResult> {
+    // Implementation logic
+    return { llmContent: result, returnDisplay: summary };
+  }
+}
+
+// 3. Main Tool Class
+export class YourTool extends BaseDeclarativeTool<YourToolParams, ToolResult> {
+  static readonly Name = 'your_tool_name';
+  
+  constructor(private config: Config) {
+    super(
+      YourTool.Name,
+      'DisplayName',
+      'Tool description for AI understanding',
+      Kind.Other, // Tool category
+      { /* JSON Schema */ }
+    );
+  }
+  
+  protected createInvocation(params: YourToolParams): ToolInvocation<YourToolParams, ToolResult> {
+    return new YourToolInvocation(this.config, params);
+  }
+}
+```
+
+#### 2. Three-Step Registration Process
+
+**Step 1: Functional Registration (`packages/core/src/config/config.ts`)**
+```typescript
+// Add import
+import { YourTool } from '../tools/your-tool.js';
+
+// Add registration call (around line 809)
+registerCoreTool(YourTool, this);
+```
+
+**Step 2: Export Registration (`packages/core/src/index.ts`)**  
+```typescript
+// Add to tool exports section (around line 84)
+export * from './tools/your-tool.js';
+```
+
+**Step 3: AI Awareness Registration (`packages/core/src/core/prompts.ts`)**
+```typescript
+// Add import
+import { YourTool } from '../tools/your-tool.js';
+
+// Add references in system prompt using ${YourTool.Name}
+// Add usage examples showing when/how to use the tool
+```
+
+### Critical Learning: All Three Registrations Required
+
+**Problem**: Initially implemented tools with only Step 1 and 2, missing Step 3.
+
+**Issue**: Tool was functionally available but the AI had no awareness of it:
+- No guidance on when to use the tool
+- No examples of proper usage
+- Missing from AI's tool ecosystem knowledge
+
+**Solution**: The `prompts.ts` registration is essential because:
+1. **AI Guidance**: Tells the AI when and how to use tools appropriately
+2. **Usage Examples**: Provides concrete examples following established patterns
+3. **Context Integration**: Integrates tool into the AI's understanding of available capabilities
+4. **Consistency**: Maintains pattern where ALL tools are documented in prompts
+
+### Tool Integration Best Practices
+
+#### Parameter Validation
+```typescript
+protected override validateToolParamValues(params: YourToolParams): string | null {
+  // JSON Schema validation happens automatically
+  // Add custom business logic validation here
+  if (params.required_param.length === 0) {
+    return 'Parameter cannot be empty';
+  }
+  return null;
+}
+```
+
+#### Error Handling
+```typescript
+async execute(signal: AbortSignal): Promise<ToolResult> {
+  try {
+    // Implementation
+    return { llmContent: result, returnDisplay: summary };
+  } catch (error) {
+    return {
+      llmContent: `Error: ${error.message}`,
+      returnDisplay: `Operation failed`,
+      error: { message: error.message, type: 'EXECUTION_ERROR' as any }
+    };
+  }
+}
+```
+
+#### Workspace Security
+```typescript
+// Always validate paths are within workspace
+const workspaceContext = this.config.getWorkspaceContext();
+if (!workspaceContext.isPathWithinWorkspace(absolutePath)) {
+  return 'Path must be within workspace directories';
+}
+```
+
+### Agent Tool Implementation Example
+
+The Agent tool implementation demonstrates advanced patterns:
+
+1. **Enum-based Configuration**: Uses `AgentType` enum with structured configurations
+2. **Simulation Pattern**: Simulates complex agent execution for different agent types
+3. **Rich Result Formatting**: Provides detailed, structured results for both LLM and display
+4. **Parameter Validation**: Custom validation for description word count (3-5 words)
+5. **Error Handling**: Comprehensive error handling with proper error types
+
+### Tool Development Checklist
+
+- [ ] **Implementation**: Tool class, invocation class, and parameter interface
+- [ ] **Validation**: JSON Schema + custom parameter validation  
+- [ ] **Error Handling**: Comprehensive error handling with proper error types
+- [ ] **Security**: Workspace path validation and AbortSignal support
+- [ ] **Registration 1**: Add to `config.ts` with `registerCoreTool()`
+- [ ] **Registration 2**: Export from `index.ts` 
+- [ ] **Registration 3**: Add to `prompts.ts` with import, references, and examples
+- [ ] **Testing**: Verify tool appears in AI's available tools and works correctly
+- [ ] **Documentation**: Update any relevant documentation
+
+### Key Tool Development Insights
+
+1. **Three-Part Registration is Mandatory**: All three registration steps are required for complete integration
+2. **AI Awareness is Critical**: Without `prompts.ts` registration, tools are invisible to the AI
+3. **Examples Drive Usage**: The AI learns proper tool usage primarily from examples in prompts
+4. **Consistent Patterns Matter**: Following established patterns ensures maintainability
+5. **Validation is Multi-Layered**: JSON Schema + custom validation provides robust parameter checking
+6. **Error Handling is Essential**: Proper error handling prevents tool failures from breaking workflows
+
+This comprehensive approach ensures tools are not just functional, but properly integrated into the AI's decision-making process and user experience.
