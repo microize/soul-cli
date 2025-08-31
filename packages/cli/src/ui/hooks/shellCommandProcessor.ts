@@ -16,7 +16,7 @@ import {
   isBinary,
   ShellExecutionResult,
   ShellExecutionService,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { type PartListUnion } from '@google/genai';
 import { UseHistoryManagerReturn } from './useHistoryManager.js';
 import { SHELL_COMMAND_NAME } from '../constants.js';

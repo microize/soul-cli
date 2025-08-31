@@ -9,9 +9,9 @@ import { getInstallationInfo, PackageManager } from './installationInfo.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as childProcess from 'child_process';
-import { isGitRepository } from '@nightskyai/soul-cli-core';
+import { isGitRepository } from '@nightskyai/soul-cli-ai-core';
 
-vi.mock('@nightskyai/soul-cli-core', () => ({
+vi.mock('@nightskyai/soul-cli-ai-core', () => ({
   isGitRepository: vi.fn(),
 }));
 
@@ -171,7 +171,7 @@ describe('getInstallationInfo', () => {
   });
 
   it('should detect global pnpm installation', () => {
-    const pnpmPath = `/Users/test/.pnpm/global/5/node_modules/.pnpm/some-hash/node_modules/@nightskyai/soul-cli/dist/index.js`;
+    const pnpmPath = `/Users/test/.pnpm/global/5/node_modules/.pnpm/some-hash/node_modules/@nightskyai/soul-cli-ai/dist/index.js`;
     process.argv[1] = pnpmPath;
     mockedRealPathSync.mockReturnValue(pnpmPath);
     mockedExecSync.mockImplementation(() => {
@@ -181,7 +181,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, false);
     expect(info.packageManager).toBe(PackageManager.PNPM);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('pnpm add -g @nightskyai/soul-cli@latest');
+    expect(info.updateCommand).toBe('pnpm add -g @nightskyai/soul-cli-ai@latest');
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
@@ -189,7 +189,7 @@ describe('getInstallationInfo', () => {
   });
 
   it('should detect global yarn installation', () => {
-    const yarnPath = `/Users/test/.yarn/global/node_modules/@nightskyai/soul-cli/dist/index.js`;
+    const yarnPath = `/Users/test/.yarn/global/node_modules/@nightskyai/soul-cli-ai/dist/index.js`;
     process.argv[1] = yarnPath;
     mockedRealPathSync.mockReturnValue(yarnPath);
     mockedExecSync.mockImplementation(() => {
@@ -200,7 +200,7 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.YARN);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe(
-      'yarn global add @nightskyai/soul-cli@latest',
+      'yarn global add @nightskyai/soul-cli-ai@latest',
     );
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
@@ -219,7 +219,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, false);
     expect(info.packageManager).toBe(PackageManager.BUN);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('bun add -g @nightskyai/soul-cli@latest');
+    expect(info.updateCommand).toBe('bun add -g @nightskyai/soul-cli-ai@latest');
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
@@ -304,7 +304,7 @@ describe('getInstallationInfo', () => {
     const info = getInstallationInfo(projectRoot, false);
     expect(info.packageManager).toBe(PackageManager.NPM);
     expect(info.isGlobal).toBe(true);
-    expect(info.updateCommand).toBe('npm install -g @nightskyai/soul-cli@latest');
+    expect(info.updateCommand).toBe('npm install -g @nightskyai/soul-cli-ai@latest');
     expect(info.updateMessage).toContain('Attempting to automatically update');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);

@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { sessionId, Logger } from '@nightskyai/soul-cli-core';
+import { sessionId, Logger } from '@nightskyai/soul-cli-ai-core';
 
 /**
  * Hook to manage the logger instance.

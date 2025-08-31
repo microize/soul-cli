@@ -7,7 +7,7 @@
 import {
   ToolCallConfirmationDetails,
   ToolResultDisplay,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 // Only defining the state enum needed by the UI
 export enum StreamingState {

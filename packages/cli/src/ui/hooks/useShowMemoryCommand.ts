@@ -5,7 +5,7 @@
  */
 
 import { Message, MessageType } from '../types.js';
-import { Config } from '@nightskyai/soul-cli-core';
+import { Config } from '@nightskyai/soul-cli-ai-core';
 import { LoadedSettings } from '../../config/settings.js';
 
 export function createShowMemoryAction(

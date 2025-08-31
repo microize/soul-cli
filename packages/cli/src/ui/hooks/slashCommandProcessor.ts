@@ -16,7 +16,7 @@ import {
   makeSlashCommandEvent,
   SlashCommandStatus,
   ToolConfirmationOutcome,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
 import {

@@ -6,7 +6,7 @@
 
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import { getProjectTempDir } from '@nightskyai/soul-cli-core';
+import { getProjectTempDir } from '@nightskyai/soul-cli-ai-core';
 
 const cleanupFunctions: Array<(() => void) | (() => Promise<void>)> = [];
 

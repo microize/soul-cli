@@ -16,7 +16,7 @@ import { formatMemoryUsage } from '../utils/formatters.js';
 vi.mock('open');
 vi.mock('../../utils/version.js');
 vi.mock('../utils/formatters.js');
-vi.mock('@nightskyai/soul-cli-core');
+vi.mock('@nightskyai/soul-cli-ai-core');
 vi.mock('node:process', () => ({
   default: {
     platform: 'test-platform',
@@ -31,7 +31,7 @@ describe('bugCommand', () => {
   beforeEach(() => {
     vi.mocked(getCliVersion).mockResolvedValue('0.1.0');
     vi.mocked(formatMemoryUsage).mockReturnValue('100 MB');
-    vi.mock('@nightskyai/soul-cli-core', () => ({
+    vi.mock('@nightskyai/soul-cli-ai-core', () => ({
       sessionId: 'test-session-id',
     }));
     vi.stubEnv('SANDBOX', 'gemini-test');

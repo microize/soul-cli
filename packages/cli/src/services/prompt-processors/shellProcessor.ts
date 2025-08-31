@@ -10,7 +10,7 @@ import {
   escapeShellArg,
   getShellConfiguration,
   ShellExecutionService,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 import { CommandContext } from '../../ui/commands/types.js';
 import {

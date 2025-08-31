@@ -12,7 +12,7 @@ import {
   type SlashCommandActionReturn,
   CommandKind,
 } from './types.js';
-import { Config } from '@nightskyai/soul-cli-core';
+import { Config } from '@nightskyai/soul-cli-ai-core';
 
 async function restoreAction(
   context: CommandContext,

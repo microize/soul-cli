@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { ApprovalMode, type Config } from '@nightskyai/soul-cli-core';
+import { ApprovalMode, type Config } from '@nightskyai/soul-cli-ai-core';
 import { useKeypress } from './useKeypress.js';
 
 export interface UseAutoAcceptIndicatorArgs {

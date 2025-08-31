@@ -15,7 +15,7 @@ import {
   CommandKind,
   SlashCommandActionReturn,
 } from './types.js';
-import { decodeTagName } from '@nightskyai/soul-cli-core';
+import { decodeTagName } from '@nightskyai/soul-cli-ai-core';
 import path from 'path';
 import { HistoryItemWithoutId, MessageType } from '../types.js';
 

@@ -13,12 +13,12 @@ import {
   UserTierId,
   GeminiClient,
   ContentGenerator,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { OAuth2Client } from 'google-auth-library';
 import { usePrivacySettings } from './usePrivacySettings.js';
 
 // Mock the dependencies
-vi.mock('@nightskyai/soul-cli-core', () => {
+vi.mock('@nightskyai/soul-cli-ai-core', () => {
   // Mock classes for instanceof checks
   class MockCodeAssistServer {
     projectId = 'test-project-id';

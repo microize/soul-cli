@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { FileSystemService } from '@nightskyai/soul-cli-core';
+import { FileSystemService } from '@nightskyai/soul-cli-ai-core';
 import * as acp from './acp.js';
 
 /**

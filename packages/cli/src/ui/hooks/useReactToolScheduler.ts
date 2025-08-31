@@ -20,7 +20,7 @@ import {
   ToolCall,
   Status as CoreStatus,
   EditorType,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { useCallback, useState, useMemo } from 'react';
 import {
   HistoryItemToolGroup,

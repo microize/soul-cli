@@ -9,7 +9,7 @@ import {
   validateNonInteractiveAuth,
   NonInteractiveConfig,
 } from './validateNonInterActiveAuth.js';
-import { AuthType } from '@nightskyai/soul-cli-core';
+import { AuthType } from '@nightskyai/soul-cli-ai-core';
 import * as auth from './config/auth.js';
 
 describe('validateNonInterActiveAuth', () => {

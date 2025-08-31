@@ -7,7 +7,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { homedir } from 'os';
-import { getErrorMessage, isWithinRoot } from '@nightskyai/soul-cli-core';
+import { getErrorMessage, isWithinRoot } from '@nightskyai/soul-cli-ai-core';
 import { Settings } from './settings.js';
 import stripJsonComments from 'strip-json-comments';
 

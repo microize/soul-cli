@@ -22,10 +22,10 @@ import {
   type EditorType,
   checkHasEditorType,
   allowEditorTypeInSandbox,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
-vi.mock('@nightskyai/soul-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/soul-cli-core');
+vi.mock('@nightskyai/soul-cli-ai-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-ai-core');
   return {
     ...actual,
     checkHasEditorType: vi.fn(() => true),

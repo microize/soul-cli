@@ -11,7 +11,7 @@ import * as path from 'path';
 import { restoreCommand } from './restoreCommand.js';
 import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
-import { Config, GitService } from '@nightskyai/soul-cli-core';
+import { Config, GitService } from '@nightskyai/soul-cli-ai-core';
 
 describe('restoreCommand', () => {
   let mockContext: CommandContext;

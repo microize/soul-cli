@@ -12,7 +12,7 @@ import {
   isTelemetrySdkInitialized,
   GeminiEventType,
   parseAndFormatApiError,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { Content, Part, FunctionCall } from '@google/genai';
 
 import { ConsolePatcher } from './ui/utils/ConsolePatcher.js';

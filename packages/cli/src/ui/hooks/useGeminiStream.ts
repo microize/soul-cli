@@ -26,7 +26,7 @@ import {
   UserPromptEvent,
   DEFAULT_GEMINI_FLASH_MODEL,
   parseAndFormatApiError,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { type Part, type PartListUnion, FinishReason } from '@google/genai';
 import {
   StreamingState,

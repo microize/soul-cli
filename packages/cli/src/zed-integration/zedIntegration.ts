@@ -22,7 +22,7 @@ import {
   getErrorStatus,
   MCPServerConfig,
   DiscoveredMCPTool,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import * as acp from './acp.js';
 import { AcpFileSystemService } from './fileSystemService.js';
 import { Readable, Writable } from 'node:stream';

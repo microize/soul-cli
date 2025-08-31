@@ -37,7 +37,7 @@ esbuild
         __dirname,
         'packages/cli/src/patches/is-in-ci.ts',
       ),
-      '@nightskyai/soul-cli-core': path.resolve(
+      '@nightskyai/soul-cli-ai-core': path.resolve(
         __dirname,
         'packages/core/src/index.ts',
       ),

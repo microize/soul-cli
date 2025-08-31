@@ -1,23 +1,17 @@
-# Gemini CLI
+# Soul CLI
+Soul CLI is an enhanced AI agent built on Google's Gemini CLI foundation. It brings the power of Gemini directly into your terminal with additional features and customizations for advanced development workflows.
 
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)
-[![License](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)
+## Why Soul CLI?
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
+- **Free tier**: 60 requests/min and 1,000 requests/day with personal Google account
+- **Powerful Gemini 2.5 Pro**: Access to 1M token context window
+- **Enhanced tools**: Advanced file operations, shell commands, web fetching, and custom agent system
+- **Extensible**: MCP (Model Context Protocol) support for custom integrations
+- **Terminal-first**: Designed for developers who live in the command line
+- **Additional features**: Task management, advanced tool integration, customizable prompts
+- **Open source**: Apache 2.0 licensed
 
-Gemini CLI is an open-source AI agent that brings the power of Gemini directly into your terminal. It provides lightweight access to Gemini, giving you the most direct path from your prompt to our model.
-
-## 🚀 Why Gemini CLI?
-
-- **🎯 Free tier**: 60 requests/min and 1,000 requests/day with personal Google account
-- **🧠 Powerful Gemini 2.5 Pro**: Access to 1M token context window
-- **🔧 Built-in tools**: Google Search grounding, file operations, shell commands, web fetching
-- **🔌 Extensible**: MCP (Model Context Protocol) support for custom integrations
-- **💻 Terminal-first**: Designed for developers who live in the command line
-- **🛡️ Open source**: Apache 2.0 licensed
-
-## 📦 Installation
+## Installation
 
 ### Quick Install
 
@@ -25,19 +19,21 @@ Gemini CLI is an open-source AI agent that brings the power of Gemini directly i
 
 ```bash
 # Using npx (no installation required)
-npx https://github.com/google-gemini/gemini-cli
+npx @nightskylabs/soul-cli-ai
 ```
 
 #### Install globally with npm
 
 ```bash
-npm install -g @google/gemini-cli
+npm install -g @nightskylabs/soul-cli-ai
 ```
 
 #### Install globally with Homebrew (macOS/Linux)
 
 ```bash
-brew install gemini-cli
+# Homebrew formula coming soon
+# For now, use npm install
+npm install -g @nightskylabs/ssoul-cli-ai
 ```
 
 #### System Requirements
@@ -63,18 +59,18 @@ brew install gemini-cli
 
 - Ground your queries with built-in [Google Search](https://ai.google.dev/gemini-api/docs/grounding) for real-time information
 - Conversation checkpointing to save and resume complex sessions
-- Custom context files (GEMINI.md) to tailor behavior for your projects
+- Custom context files (SOUL.md) to tailor behavior for your projects
 
 ### GitHub Integration
 
-Integrate Gemini CLI directly into your GitHub workflows with [**Gemini CLI GitHub Action**](https://github.com/google-github-actions/run-gemini-cli):
+Integrate Soul CLI directly into your GitHub workflows:
 
 - **Pull Request Reviews**: Automated code review with contextual feedback and suggestions
 - **Issue Triage**: Automated labeling and prioritization of GitHub issues based on content analysis
-- **On-demand Assistance**: Mention `@gemini-cli` in issues and pull requests for help with debugging, explanations, or task delegation
+- **On-demand Assistance**: Use Soul CLI in your CI/CD pipelines for automated assistance
 - **Custom Workflows**: Build automated, scheduled and on-demand workflows tailored to your team's needs
 
-## 🔐 Authentication Options
+## Authentication Options
 
 Choose the authentication method that best fits your needs:
 
@@ -89,10 +85,10 @@ Choose the authentication method that best fits your needs:
 - **No API key management** - just sign in with your Google account
 - **Automatic updates** to latest models
 
-#### Start Gemini CLI, then choose OAuth and follow the browser authentication flow when prompted
+#### Start Soul CLI, then choose OAuth and follow the browser authentication flow when prompted
 
 ```bash
-gemini
+soul
 ```
 
 #### If you are using a paid Code Assist License from your organization, remember to set the Google Cloud Project
@@ -100,7 +96,7 @@ gemini
 ```bash
 # Set your Google Cloud Project
 export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_NAME"
-gemini
+soul
 ```
 
 ### Option 2: Gemini API Key
@@ -116,7 +112,7 @@ gemini
 ```bash
 # Get your key from https://aistudio.google.com/apikey
 export GEMINI_API_KEY="YOUR_API_KEY"
-gemini
+soul
 ```
 
 ### Option 3: Vertex AI
@@ -133,7 +129,7 @@ gemini
 # Get your key from Google Cloud Console
 export GOOGLE_API_KEY="YOUR_API_KEY"
 export GOOGLE_GENAI_USE_VERTEXAI=true
-gemini
+soul
 ```
 
 For Google Workspace accounts and other authentication methods, see the [authentication guide](./docs/cli/authentication.md).
@@ -145,25 +141,25 @@ For Google Workspace accounts and other authentication methods, see the [authent
 #### Start in current directory
 
 ```bash
-gemini
+soul
 ```
 
 #### Include multiple directories
 
 ```bash
-gemini --include-directories ../lib,../docs
+soul --include-directories ../lib,../docs
 ```
 
 #### Use specific model
 
 ```bash
-gemini -m gemini-2.5-flash
+soul -m gemini-2.5-flash
 ```
 
 #### Non-interactive mode for scripts
 
 ```bash
-gemini -p "Explain the architecture of this codebase"
+soul -p "Explain the architecture of this codebase"
 ```
 
 ### Quick Examples
@@ -172,18 +168,18 @@ gemini -p "Explain the architecture of this codebase"
 
 ````bash
 cd new-project/
-gemini
+soul
 > Write me a Discord bot that answers questions using a FAQ.md file I will provide
 
 #### Analyze existing code
 ```bash
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
-gemini
+git clone https://github.com/nightskylabs/soul-cli
+cd soul-cli
+soul
 > Give me a summary of all of the changes that went in yesterday
 ````
 
-## 📚 Documentation
+## Documentation
 
 ### Getting Started
 
@@ -196,7 +192,7 @@ gemini
 
 - [**Commands Reference**](./docs/cli/commands.md) - All slash commands (`/help`, `/chat`, `/mcp`, etc.)
 - [**Checkpointing**](./docs/checkpointing.md) - Save and resume conversations
-- [**Memory Management**](./docs/tools/memory.md) - Using GEMINI.md context files
+- [**Memory Management**](./docs/tools/memory.md) - Using SOUL.md context files
 - [**Token Caching**](./docs/cli/token-caching.md) - Optimize token usage
 
 ### Tools & Extensions
@@ -222,18 +218,18 @@ gemini
 
 - [**Settings Reference**](./docs/cli/configuration.md) - All configuration options
 - [**Theme Customization**](./docs/cli/themes.md) - Visual customization
-- [**.gemini Directory**](./docs/gemini-ignore.md) - Project-specific settings
+- [**.soul Directory**](./docs/soul-ignore.md) - Project-specific settings
 - [**Environment Variables**](./docs/cli/configuration.md#environment-variables)
 
 ### Troubleshooting & Support
 
 - [**Troubleshooting Guide**](./docs/troubleshooting.md) - Common issues and solutions
 - [**FAQ**](./docs/troubleshooting.md#frequently-asked-questions) - Quick answers
-- Use `/bug` command to report issues directly from the CLI
+
 
 ### Using MCP Servers
 
-Configure MCP servers in `~/.gemini/settings.json` to extend Gemini CLI with custom tools:
+Configure MCP servers in `~/.soul/settings.json` to extend Soul CLI with custom tools:
 
 ```text
 > @github List my open pull requests
@@ -242,26 +238,6 @@ Configure MCP servers in `~/.gemini/settings.json` to extend Gemini CLI with cus
 ```
 
 See the [MCP Server Integration guide](./docs/tools/mcp-server.md) for setup instructions.
-
-## 🤝 Contributing
-
-We welcome contributions! Gemini CLI is fully open source (Apache 2.0), and we encourage the community to:
-
-- Report bugs and suggest features
-- Improve documentation
-- Submit code improvements
-- Share your MCP servers and extensions
-
-See our [Contributing Guide](./CONTRIBUTING.md) for development setup, coding standards, and how to submit pull requests.
-
-Check our [Official Roadmap](https://github.com/orgs/google-gemini/projects/11/) for planned features and priorities.
-
-## 📖 Resources
-
-- **[Official Roadmap](./ROADMAP.md)** - See what's coming next
-- **[NPM Package](https://www.npmjs.com/package/@google/gemini-cli)** - Package registry
-- **[GitHub Issues](https://github.com/google-gemini/gemini-cli/issues)** - Report bugs or request features
-- **[Security Advisories](https://github.com/google-gemini/gemini-cli/security/advisories)** - Security updates
 
 ### Uninstall
 
@@ -273,8 +249,21 @@ See the [Uninstall Guide](docs/Uninstall.md) for removal instructions.
 - **Terms of Service**: [Terms & Privacy](./docs/tos-privacy.md)
 - **Security**: [Security Policy](SECURITY.md)
 
+## 🌟 What's New in Soul CLI
+
+Soul CLI extends the original Gemini CLI with:
+
+- **Enhanced Tool System**: Advanced agent tools with specialized capabilities
+- **Task Management**: Built-in todo tracking for complex workflows
+- **Customizable Prompts**: Flexible system prompt configuration
+- **Extended Documentation**: Comprehensive CLAUDE.md development guide
+- **Improved Build System**: Optimized bundling and distribution
+
 ---
 
 <p align="center">
-  Built with ❤️ by Google and the open source community
+  Built with ❤️ by Nightsky Labs.ai, based on Google's Gemini CLI
+</p>
+<p align="center">
+  Special thanks to the Google Gemini team and the open source community
 </p>

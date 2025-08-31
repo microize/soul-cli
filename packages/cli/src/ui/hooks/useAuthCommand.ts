@@ -11,7 +11,7 @@ import {
   Config,
   clearCachedCredentialFile,
   getErrorMessage,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { runExitCleanup } from '../../utils/cleanup.js';
 
 export const useAuthCommand = (

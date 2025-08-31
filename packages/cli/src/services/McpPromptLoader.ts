@@ -8,7 +8,7 @@ import {
   Config,
   getErrorMessage,
   getMCPServerPrompts,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import {
   CommandContext,
   CommandKind,

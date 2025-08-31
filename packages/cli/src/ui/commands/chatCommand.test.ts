@@ -21,7 +21,7 @@ import {
 } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { Content } from '@google/genai';
-import { GeminiClient } from '@nightskyai/soul-cli-core';
+import { GeminiClient } from '@nightskyai/soul-cli-ai-core';
 
 import * as fsPromises from 'fs/promises';
 import { chatCommand } from './chatCommand.js';

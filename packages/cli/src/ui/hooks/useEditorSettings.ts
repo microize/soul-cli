@@ -11,7 +11,7 @@ import {
   allowEditorTypeInSandbox,
   checkHasEditorType,
   EditorType,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 interface UseEditorSettingsReturn {
   isEditorDialogOpen: boolean;

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthType } from '@nightskyai/soul-cli-core';
+import { AuthType } from '@nightskyai/soul-cli-ai-core';
 import { vi } from 'vitest';
 import { validateAuthMethod } from './auth.js';
 

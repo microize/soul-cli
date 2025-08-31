@@ -15,7 +15,7 @@ import { isSlashCommand } from '../utils/commandUtils.js';
 import { toCodePoints } from '../utils/textUtils.js';
 import { useAtCompletion } from './useAtCompletion.js';
 import { useSlashCompletion } from './useSlashCompletion.js';
-import { Config } from '@nightskyai/soul-cli-core';
+import { Config } from '@nightskyai/soul-cli-ai-core';
 import { useCompletion } from './useCompletion.js';
 
 export enum CompletionMode {

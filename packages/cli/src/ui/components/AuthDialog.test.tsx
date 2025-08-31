@@ -7,7 +7,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { AuthDialog } from './AuthDialog.js';
 import { LoadedSettings, SettingScope } from '../../config/settings.js';
-import { AuthType } from '@nightskyai/soul-cli-core';
+import { AuthType } from '@nightskyai/soul-cli-ai-core';
 import { renderWithProviders } from '../../test-utils/render.js';
 
 describe('AuthDialog', () => {

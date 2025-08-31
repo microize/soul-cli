@@ -12,15 +12,15 @@ import {
   shutdownTelemetry,
   GeminiEventType,
   ServerGeminiStreamEvent,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { Part } from '@google/genai';
 import { runNonInteractive } from './nonInteractiveCli.js';
 import { vi } from 'vitest';
 
 // Mock core modules
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-ai-core')>();
   return {
     ...original,
     executeToolCall: vi.fn(),

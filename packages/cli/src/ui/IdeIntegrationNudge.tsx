@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { DetectedIde, getIdeInfo } from '@nightskyai/soul-cli-core';
+import { DetectedIde, getIdeInfo } from '@nightskyai/soul-cli-ai-core';
 import { Box, Text } from 'ink';
 import {
   RadioButtonSelect,

@@ -5,7 +5,7 @@
  */
 
 import { Box } from 'ink';
-import { type Config, AuthType } from '@nightskyai/soul-cli-core';
+import { type Config, AuthType } from '@nightskyai/soul-cli-ai-core';
 import { GeminiPrivacyNotice } from './GeminiPrivacyNotice.js';
 import { CloudPaidPrivacyNotice } from './CloudPaidPrivacyNotice.js';
 import { CloudFreePrivacyNotice } from './CloudFreePrivacyNotice.js';

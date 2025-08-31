@@ -10,7 +10,7 @@ import {
   TelemetrySettings,
   AuthType,
   ChatCompressionSettings,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { CustomTheme } from '../ui/themes/theme.js';
 
 export interface SettingDefinition {

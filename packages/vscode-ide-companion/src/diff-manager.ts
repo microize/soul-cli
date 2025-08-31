@@ -7,7 +7,7 @@
 import {
   IdeDiffAcceptedNotificationSchema,
   IdeDiffClosedNotificationSchema,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { type JSONRPCNotification } from '@modelcontextprotocol/sdk/types.js';
 import * as path from 'node:path';
 import * as vscode from 'vscode';

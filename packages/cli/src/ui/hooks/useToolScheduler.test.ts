@@ -29,7 +29,7 @@ import {
   ToolInvocation,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import {
   HistoryItemWithoutId,
   ToolCallStatus,
@@ -37,8 +37,8 @@ import {
 } from '../types.js';
 
 // Mocks
-vi.mock('@nightskyai/soul-cli-core', async () => {
-  const actual = await vi.importActual('@nightskyai/soul-cli-core');
+vi.mock('@nightskyai/soul-cli-ai-core', async () => {
+  const actual = await vi.importActual('@nightskyai/soul-cli-ai-core');
   return {
     ...actual,
     ToolRegistry: vi.fn(),

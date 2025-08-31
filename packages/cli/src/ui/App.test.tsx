@@ -17,7 +17,7 @@ import {
   GeminiClient,
   ideContext,
   type AuthType,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { LoadedSettings, SettingsFile, Settings } from '../config/settings.js';
 import process from 'node:process';
 import { useGeminiStream } from './hooks/useGeminiStream.js';
@@ -89,10 +89,10 @@ interface MockServerConfig {
   getIdeClient: Mock<() => { getCurrentIde: Mock<() => string | undefined> }>;
 }
 
-// Mock @nightskyai/soul-cli-core and its Config class
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+// Mock @nightskyai/soul-cli-ai-core and its Config class
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const actualCore =
-    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-ai-core')>();
   const ConfigClassMock = vi
     .fn()
     .mockImplementation((optionsPassedToConstructor) => {
@@ -261,7 +261,7 @@ vi.mock('../hooks/useTerminalSize.js', () => ({
 
 const mockedCheckForUpdates = vi.mocked(checkForUpdates);
 const { isGitRepository: mockedIsGitRepository } = vi.mocked(
-  await import('@nightskyai/soul-cli-core'),
+  await import('@nightskyai/soul-cli-ai-core'),
 );
 
 vi.mock('node:child_process');

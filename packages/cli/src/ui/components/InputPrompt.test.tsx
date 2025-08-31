@@ -8,7 +8,7 @@ import { renderWithProviders } from '../../test-utils/render.js';
 import { waitFor } from '@testing-library/react';
 import { InputPrompt, InputPromptProps } from './InputPrompt.js';
 import type { TextBuffer } from './shared/text-buffer.js';
-import { Config } from '@nightskyai/soul-cli-core';
+import { Config } from '@nightskyai/soul-cli-ai-core';
 import * as path from 'path';
 import {
   CommandContext,

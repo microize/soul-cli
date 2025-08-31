@@ -7,7 +7,7 @@
 import React from 'react';
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
-import { ApprovalMode } from '@nightskyai/soul-cli-core';
+import { ApprovalMode } from '@nightskyai/soul-cli-ai-core';
 
 interface AutoAcceptIndicatorProps {
   approvalMode: ApprovalMode;

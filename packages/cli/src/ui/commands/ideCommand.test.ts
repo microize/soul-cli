@@ -15,12 +15,12 @@ import {
 } from 'vitest';
 import { ideCommand } from './ideCommand.js';
 import { type CommandContext } from './types.js';
-import { type Config, DetectedIde } from '@nightskyai/soul-cli-core';
-import * as core from '@nightskyai/soul-cli-core';
+import { type Config, DetectedIde } from '@nightskyai/soul-cli-ai-core';
+import * as core from '@nightskyai/soul-cli-ai-core';
 
 vi.mock('child_process');
 vi.mock('glob');
-vi.mock('@nightskyai/soul-cli-core');
+vi.mock('@nightskyai/soul-cli-ai-core');
 
 describe('ideCommand', () => {
   let mockContext: CommandContext;

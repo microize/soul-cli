@@ -7,7 +7,7 @@
 // File for 'soul mcp add' command
 import type { CommandModule } from 'yargs';
 import { loadSettings, SettingScope } from '../../config/settings.js';
-import { MCPServerConfig } from '@nightskyai/soul-cli-core';
+import { MCPServerConfig } from '@nightskyai/soul-cli-ai-core';
 
 async function addMcpServer(
   name: string,

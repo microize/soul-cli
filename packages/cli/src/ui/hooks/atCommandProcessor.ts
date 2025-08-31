@@ -13,7 +13,7 @@ import {
   getErrorMessage,
   isNodeError,
   unescapePath,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import {
   HistoryItem,
   IndividualToolCallDisplay,

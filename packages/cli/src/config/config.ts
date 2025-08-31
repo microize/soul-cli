@@ -27,7 +27,7 @@ import {
   EditTool,
   WriteFileTool,
   MCPServerConfig,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { Settings } from './settings.js';
 
 import { Extension, annotateActiveExtensions } from './extension.js';

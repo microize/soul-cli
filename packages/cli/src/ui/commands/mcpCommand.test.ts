@@ -13,14 +13,14 @@ import {
   getMCPServerStatus,
   getMCPDiscoveryState,
   DiscoveredMCPTool,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 import { MessageActionReturn } from './types.js';
 import { Type, CallableTool } from '@google/genai';
 
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-ai-core')>();
   return {
     ...actual,
     getMCPServerStatus: vi.fn(),
@@ -890,7 +890,7 @@ describe('mcpCommand', () => {
       // Mock the reloadCommands function
       context.ui.reloadCommands = vi.fn();
 
-      const { MCPOAuthProvider } = await import('@nightskyai/soul-cli-core');
+      const { MCPOAuthProvider } = await import('@nightskyai/soul-cli-ai-core');
 
       const authCommand = mcpCommand.subCommands?.find(
         (cmd) => cmd.name === 'auth',
@@ -926,7 +926,7 @@ describe('mcpCommand', () => {
         },
       });
 
-      const { MCPOAuthProvider } = await import('@nightskyai/soul-cli-core');
+      const { MCPOAuthProvider } = await import('@nightskyai/soul-cli-ai-core');
       (
         MCPOAuthProvider.authenticate as ReturnType<typeof vi.fn>
       ).mockRejectedValue(new Error('Auth failed'));

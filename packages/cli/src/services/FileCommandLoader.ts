@@ -13,7 +13,7 @@ import {
   Config,
   getProjectCommandsDir,
   getUserCommandsDir,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { ICommandLoader } from './types.js';
 import {
   CommandContext,

@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { directoryCommand, expandHomeDir } from './directoryCommand.js';
-import { Config, WorkspaceContext } from '@nightskyai/soul-cli-core';
+import { Config, WorkspaceContext } from '@nightskyai/soul-cli-ai-core';
 import { CommandContext } from './types.js';
 import { MessageType } from '../types.js';
 import * as os from 'os';

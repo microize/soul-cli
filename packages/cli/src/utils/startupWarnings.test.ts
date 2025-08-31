@@ -7,10 +7,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getStartupWarnings } from './startupWarnings.js';
 import * as fs from 'fs/promises';
-import { getErrorMessage } from '@nightskyai/soul-cli-core';
+import { getErrorMessage } from '@nightskyai/soul-cli-ai-core';
 
 vi.mock('fs/promises');
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,

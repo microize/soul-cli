@@ -8,7 +8,7 @@ import {
   Config,
   KittySequenceOverflowEvent,
   logKittySequenceOverflow,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { useStdin } from 'ink';
 import React, {
   createContext,

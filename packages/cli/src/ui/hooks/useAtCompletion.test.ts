@@ -9,7 +9,7 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import { useAtCompletion } from './useAtCompletion.js';
-import { Config, FileSearch, FileSearchFactory } from '@nightskyai/soul-cli-core';
+import { Config, FileSearch, FileSearchFactory } from '@nightskyai/soul-cli-ai-core';
 import {
   createTmpDir,
   cleanupTmpDir,

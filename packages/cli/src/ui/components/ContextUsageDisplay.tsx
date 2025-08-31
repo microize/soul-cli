@@ -6,7 +6,7 @@
 
 import { Text } from 'ink';
 import { Colors } from '../colors.js';
-import { tokenLimit } from '@nightskyai/soul-cli-core';
+import { tokenLimit } from '@nightskyai/soul-cli-ai-core';
 
 export const ContextUsageDisplay = ({
   promptTokenCount,

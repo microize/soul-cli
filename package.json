@@ -1,6 +1,6 @@
 {
-  "name": "@nightskyai/soul-cli",
-  "version": "0.4.10",
+  "name": "@nightskyai/soul-cli-ai",
+  "version": "0.3.2",
   "engines": {
     "node": ">=20.0.0"
   },

@@ -8,11 +8,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ShellTool, EditTool, WriteFileTool } from '@nightskyai/soul-cli-core';
+import { ShellTool, EditTool, WriteFileTool } from '@nightskyai/soul-cli-ai-core';
 import { loadCliConfig, parseArguments } from './config.js';
 import { Settings } from './settings.js';
 import { Extension } from './extension.js';
-import * as ServerConfig from '@nightskyai/soul-cli-core';
+import * as ServerConfig from '@nightskyai/soul-cli-ai-core';
 import { isWorkspaceTrusted } from './trustedFolders.js';
 
 vi.mock('./trustedFolders.js', () => ({
@@ -37,9 +37,9 @@ vi.mock('read-package-up', () => ({
   ),
 }));
 
-vi.mock('@nightskyai/soul-cli-core', async () => {
+vi.mock('@nightskyai/soul-cli-ai-core', async () => {
   const actualServer = await vi.importActual<typeof ServerConfig>(
-    '@nightskyai/soul-cli-core',
+    '@nightskyai/soul-cli-ai-core',
   );
   return {
     ...actualServer,

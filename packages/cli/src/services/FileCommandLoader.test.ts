@@ -9,7 +9,7 @@ import {
   Config,
   getProjectCommandsDir,
   getUserCommandsDir,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import mock from 'mock-fs';
 import { FileCommandLoader } from './FileCommandLoader.js';
 import { assert, vi } from 'vitest';
@@ -52,9 +52,9 @@ vi.mock('./prompt-processors/argumentProcessor.js', async (importOriginal) => {
       .mockImplementation(() => new original.DefaultArgumentProcessor()),
   };
 });
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-ai-core')>();
   return {
     ...original,
     isCommandAllowed: vi.fn(),

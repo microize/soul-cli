@@ -20,14 +20,14 @@ import {
   Config,
   Config as ActualConfigType,
   ApprovalMode,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { useKeypress, Key } from './useKeypress.js';
 
 vi.mock('./useKeypress.js');
 
-vi.mock('@nightskyai/soul-cli-core', async () => {
+vi.mock('@nightskyai/soul-cli-ai-core', async () => {
   const actualServerModule = (await vi.importActual(
-    '@nightskyai/soul-cli-core',
+    '@nightskyai/soul-cli-ai-core',
   )) as Record<string, unknown>;
   return {
     ...actualServerModule,

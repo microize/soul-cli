@@ -22,7 +22,7 @@ import {
   AuthType,
   GeminiEventType as ServerGeminiEventType,
   AnyToolInvocation,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { Part, PartListUnion } from '@google/genai';
 import { UseHistoryManagerReturn } from './useHistoryManager.js';
 import {
@@ -53,7 +53,7 @@ const MockedUserPromptEvent = vi.hoisted(() =>
 );
 const mockParseAndFormatApiError = vi.hoisted(() => vi.fn());
 
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const actualCoreModule = (await importOriginal()) as any;
   return {
     ...actualCoreModule,

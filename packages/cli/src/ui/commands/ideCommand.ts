@@ -14,7 +14,7 @@ import {
   IdeClient,
   type File,
   ideContext,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import path from 'node:path';
 import {
   CommandContext,

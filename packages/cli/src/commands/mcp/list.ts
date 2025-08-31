@@ -11,7 +11,7 @@ import {
   MCPServerConfig,
   MCPServerStatus,
   createTransport,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { loadExtensions } from '../../config/extension.js';
 

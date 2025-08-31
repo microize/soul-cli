@@ -8,12 +8,12 @@ import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { listMcpServers } from './list.js';
 import { loadSettings } from '../../config/settings.js';
 import { loadExtensions } from '../../config/extension.js';
-import { createTransport } from '@nightskyai/soul-cli-core';
+import { createTransport } from '@nightskyai/soul-cli-ai-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
 vi.mock('../../config/settings.js');
 vi.mock('../../config/extension.js');
-vi.mock('@nightskyai/soul-cli-core');
+vi.mock('@nightskyai/soul-cli-ai-core');
 vi.mock('@modelcontextprotocol/sdk/client/index.js');
 
 const mockedLoadSettings = loadSettings as vi.Mock;

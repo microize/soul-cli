@@ -10,7 +10,7 @@ import {
   CodeAssistServer,
   UserTierId,
   LoggingContentGenerator,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 export interface PrivacyState {
   isLoading: boolean;

@@ -18,7 +18,7 @@ import {
   SessionMetrics,
   ModelMetrics,
   sessionId,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
 // --- Interface Definitions ---
 

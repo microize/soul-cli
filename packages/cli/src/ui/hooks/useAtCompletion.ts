@@ -10,7 +10,7 @@ import {
   FileSearch,
   FileSearchFactory,
   escapePath,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import {
   Suggestion,
   MAX_SUGGESTIONS_TO_SHOW,

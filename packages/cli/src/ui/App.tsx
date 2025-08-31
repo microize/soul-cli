@@ -62,7 +62,7 @@ import {
   AuthType,
   type IdeContext,
   ideContext,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import {
   IdeIntegrationNudge,
   IdeIntegrationNudgeResult,
@@ -90,7 +90,7 @@ import {
   isProQuotaExceededError,
   isGenericQuotaExceededError,
   UserTierId,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { UpdateObject } from './utils/updateCheck.js';
 import ansiEscapes from 'ansi-escapes';
 import { OverflowProvider } from './contexts/OverflowContext.js';

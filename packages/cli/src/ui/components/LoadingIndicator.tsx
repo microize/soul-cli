@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ThoughtSummary } from '@nightskyai/soul-cli-core';
+import { ThoughtSummary } from '@nightskyai/soul-cli-ai-core';
 import React from 'react';
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';

@@ -14,11 +14,11 @@ import {
   getErrorMessage,
   loadServerHierarchicalMemory,
   type FileDiscoveryService,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 
-vi.mock('@nightskyai/soul-cli-core', async (importOriginal) => {
+vi.mock('@nightskyai/soul-cli-ai-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@nightskyai/soul-cli-core')>();
+    await importOriginal<typeof import('@nightskyai/soul-cli-ai-core')>();
   return {
     ...original,
     getErrorMessage: vi.fn((error: unknown) => {

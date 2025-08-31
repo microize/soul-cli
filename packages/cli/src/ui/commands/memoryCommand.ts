@@ -7,7 +7,7 @@
 import {
   getErrorMessage,
   loadServerHierarchicalMemory,
-} from '@nightskyai/soul-cli-core';
+} from '@nightskyai/soul-cli-ai-core';
 import { MessageType } from '../types.js';
 import {
   CommandKind,
