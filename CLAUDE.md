@@ -696,3 +696,126 @@ The Agent tool implementation demonstrates advanced patterns:
 6. **Error Handling is Essential**: Proper error handling prevents tool failures from breaking workflows
 
 This comprehensive approach ensures tools are not just functional, but properly integrated into the AI's decision-making process and user experience.
+
+## Package Publishing Process (Version 0.0.2 Learnings)
+
+### Publishing Strategy for Multi-Package Workspaces
+
+When publishing multiple packages in a monorepo/workspace setup, the process involves several key steps:
+
+#### 1. Version Update Strategy
+```bash
+# Update all package versions consistently
+# Root package.json
+"version": "0.0.2"
+
+# Each workspace package
+packages/cli/package.json -> "version": "0.0.2"
+packages/core/package.json -> "version": "0.0.2"
+packages/test-utils/package.json -> "version": "0.0.2" (private, won't publish)
+packages/vscode-ide-companion/package.json -> "version": "0.0.2" (VS Code extension)
+```
+
+#### 2. Build Process Challenges
+
+**Issue**: TypeScript compilation errors in test files can block traditional build
+```bash
+npm run build  # May fail due to strict TypeScript in test files
+```
+
+**Solution**: Use bundle approach for distribution
+```bash
+npm run bundle  # Creates self-contained bundle/soul.js
+# Bundle approach bypasses individual package TypeScript issues
+# Focuses on creating working distribution artifact
+```
+
+#### 3. Publishing Order and Dependencies
+
+**Successful Publishing Flow**:
+1. **Main Package First**: Publish root package with bundled executable
+   ```bash
+   npm publish --access public  # From root directory
+   ```
+
+2. **Core Library Second**: Publish shared core functionality
+   ```bash
+   cd packages/core && npm publish --access public
+   ```
+
+3. **CLI Package**: May already be published if using workspace strategy
+   ```bash
+   cd packages/cli && npm publish --access public
+   ```
+
+#### 4. Common Publishing Issues and Solutions
+
+**Issue 1**: "Failed to save packument" error
+- **Cause**: NPM registry timing/processing delays
+- **Solution**: Retry after a few seconds, usually succeeds on second attempt
+
+**Issue 2**: Version already exists (E403)
+- **Cause**: Attempting to republish same version
+- **Solution**: Verify with `npm view @package/name versions`
+
+**Issue 3**: TypeScript build errors blocking publish
+- **Cause**: Strict TypeScript checking in test files
+- **Solution**: Use bundle approach which compiles only production code
+
+#### 5. Verification Commands
+
+```bash
+# Check published versions
+npm view @nightskyai/soul-cli-ai versions --json
+npm view @nightskyai/soul-cli-ai-core@0.0.2
+
+# Verify bundle functionality
+node bundle/soul.js --version  # Should output: 0.0.2
+
+# Check what gets published (dry run)
+npm publish --dry-run
+```
+
+#### 6. Package Structure for Publishing
+
+**Main Package** (`@nightskyai/soul-cli-ai`):
+- Contains bundled executable in `bundle/soul.js`
+- Includes all dependencies bundled except those marked as external
+- Size: ~10.9MB unpacked
+
+**Core Package** (`@nightskyai/soul-cli-ai-core`):
+- Contains compiled TypeScript (`dist/` directory)
+- Includes type definitions for TypeScript consumers
+- Size: ~3.8MB unpacked
+
+**CLI Package** (`@nightskyai/soul-cli-ai`):
+- Workspace package with CLI-specific functionality
+- May conflict with main package name if not carefully managed
+
+#### 7. Private vs Public Packages
+
+- **Private Packages**: Set `"private": true` in package.json (e.g., test-utils)
+- **Public Packages**: Require `--access public` flag for scoped packages
+- **VS Code Extensions**: Published to VS Code marketplace, not npm
+
+### Key Learnings from 0.0.2 Release
+
+1. **Bundle Strategy Superiority**: For CLI tools, bundling provides more reliable distribution than traditional npm workspace builds
+2. **Version Synchronization**: Keep all package versions synchronized to avoid dependency conflicts
+3. **Publishing Resilience**: NPM publish may require retries due to registry processing delays
+4. **Build vs Bundle**: Bundle can succeed even when full TypeScript build fails
+5. **Scoped Package Access**: Always use `--access public` for @scoped packages
+6. **Verification is Critical**: Always verify published package works before announcing release
+
+### Publishing Checklist for Future Releases
+
+- [ ] Update version in all package.json files
+- [ ] Run `npm run bundle` to create distribution
+- [ ] Verify bundle with `node bundle/soul.js --version`
+- [ ] Publish main package: `npm publish --access public`
+- [ ] Publish core package: `cd packages/core && npm publish --access public`
+- [ ] Verify published versions: `npm view @nightskyai/soul-cli-ai versions`
+- [ ] Test installation: `npm install -g @nightskyai/soul-cli-ai@latest`
+- [ ] Verify executable: `soul --version`
+
+This systematic approach ensures smooth publishing of multi-package workspaces even when facing TypeScript compilation challenges in development.

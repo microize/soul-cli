@@ -1,6 +1,6 @@
 {
   "name": "@nightskyai/soul-cli-ai-core",
-  "version": "0.3.0",
+  "version": "0.0.2",
   "description": "Gemini CLI Core",
   "repository": {
     "type": "git",
