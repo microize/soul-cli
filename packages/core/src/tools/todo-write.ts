@@ -214,8 +214,7 @@ export class TodoWriteTool extends BaseDeclarativeTool<TodoWriteParams, ToolResu
     super(
       TodoWriteTool.Name,
       'TodoWrite',
-      `Use this tool to create and manage a structured task list for your current coding session. This helps you track progress, organize complex tasks, and demonstrate thoroughness to the user.
-It also helps the user understand the progress of the task and overall progress of their requests.
+      `Use this tool to create and manage a structured task list for your current coding session. This helps you track progress, organize tasks, and demonstrate thoroughness to the user. It also helps the user understand the progress of the task and overall progress of their requests.
 
 ## When to Use This Tool
 Use this tool proactively in these scenarios:
@@ -231,12 +230,7 @@ Use this tool proactively in these scenarios:
 ## When NOT to Use This Tool
 
 Skip using this tool when:
-1. There is only a single, straightforward task
-2. The task is trivial and tracking it provides no organizational benefit
-3. The task can be completed in less than 3 trivial steps
-4. The task is purely conversational or informational
-
-NOTE that you should not use this tool if there is only one trivial task to do. In this case you are better off just doing the task directly.
+1. The task is purely conversational or informational
 
 ## Task States and Management
 
